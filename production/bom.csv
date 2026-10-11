@@ -1,0 +1,6 @@
+"Designator","Comment","Footprint","LCSC Part #"
+"C1,C2","100nF","Capacitor_SMD:C_0805_2012Metric","C49678"
+"Q1","MMBT3904","Package_TO_SOT_SMD:SOT-23","C20526"
+"R1,R2","10K","Resistor_SMD:R_0805_2012Metric","C17414"
+"R3","1K","Resistor_SMD:R_0805_2012Metric","C17513"
+"U1","ATtiny85-20S","Package_SO:SOIC-8_5.3x5.3mm_P1.27mm","C89852"
