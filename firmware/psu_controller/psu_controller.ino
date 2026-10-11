@@ -90,16 +90,18 @@ void loop() {
   float err = t - T_TARGET;
   const float maxI = (PWM_TOP - DUTY_MIN) / KI;
 
-  if (t > T_PANIC) {
-    duty = PWM_TOP;
-    integral = maxI;
-  } else {
+  // Anti-windup: skip accumulating while the output is already pinned at 100%
+  // and the error would only push it further. Unwinding is never blocked, so
+  // the fan backs off as soon as the temperature drops below the setpoint.
+  float out = DUTY_MIN + KP * err + KI * integral;
+  if (!(out >= PWM_TOP && err > 0)) {
     integral += err;                        // loop period is 1 s, so this is degC*s
-    if (integral > maxI) integral = maxI;   // anti-windup
-    if (integral < 0)    integral = 0;
-    duty = DUTY_MIN + KP * err + KI * integral;
   }
+  if (integral > maxI) integral = maxI;
+  if (integral < 0)    integral = 0;
 
+  duty = DUTY_MIN + KP * err + KI * integral;
+  if (t > T_PANIC)     duty = PWM_TOP;      // also covers the 999 sensor-fault value
   if (duty > PWM_TOP)  duty = PWM_TOP;
   if (duty < DUTY_MIN) duty = DUTY_MIN;
   setFan(duty);
