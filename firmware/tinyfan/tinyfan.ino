@@ -1,4 +1,4 @@
-// PSU fan controller firmware for the psu_controller board (ATtiny85, SOIC-8).
+// PSU fan controller firmware for the tinyfan board (ATtiny85, SOIC-8).
 //
 // Hardware (see ../../README.md):
 //   PB3 / ADC3  NTC thermistor to GND, 10k pull-up (R2) to +5 V, 100 nF (C2)

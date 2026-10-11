@@ -1,15 +1,15 @@
-# Fabrication outputs for psu_controller, driven by kicad-cli (KiCad 10).
+# Fabrication outputs for tinyfan, driven by kicad-cli (KiCad 10).
 #
 #   make            -> erc + drc + gerbers + bom + pos
 #   make gerbers    -> gerbers/ (Gerber X2, Protel extensions) + Excellon drill
 #   make bom        -> production/bom.csv (JLCPCB columns, grouped by value)
-#   make pos        -> production/psu_controller-all-pos.csv (JLCPCB CPL header)
-#   make zip        -> build/psu_controller-gerbers.zip for upload to the fab
-#   make pdf        -> build/psu_controller-schematic.pdf
+#   make pos        -> production/tinyfan-all-pos.csv (JLCPCB CPL header)
+#   make zip        -> build/tinyfan-gerbers.zip for upload to the fab
+#   make pdf        -> build/tinyfan-schematic.pdf
 #   make firmware   -> build the ATtiny85 firmware (see firmware/Makefile)
 #   make clean      -> remove build/ (hardware and firmware)
 
-PROJECT   := psu_controller
+PROJECT   := tinyfan
 SCH       := $(PROJECT).kicad_sch
 PCB       := $(PROJECT).kicad_pcb
 KICAD_CLI ?= kicad-cli

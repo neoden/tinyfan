@@ -1,4 +1,4 @@
-# psu_controller
+# tinyfan
 
 Temperature-controlled fan driver for a PC power supply. An ATtiny85 reads an
 NTC thermistor and drives a standard 4-pin PWM fan from the PSU's own +5 V and
@@ -27,14 +27,14 @@ PB2 and PB4 are unused.
 
 ## Firmware
 
-`firmware/psu_controller/psu_controller.ino` is an Arduino sketch for
+`firmware/tinyfan/tinyfan.ino` is an Arduino sketch for
 [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore), built with
 `arduino-cli` (no IDE needed):
 
 ```sh
 cd firmware
 make deps                 # once: install the ATTinyCore board package
-make                      # compile -> build/psu_controller.ino.hex
+make                      # compile -> build/tinyfan.ino.hex
 make fuses PROGRAMMER=usbasp   # once per chip: 8 MHz internal RC, BOD 4.3 V
 make flash PROGRAMMER=usbasp   # upload over ISP
 ```
@@ -60,10 +60,10 @@ R3 and Q1's base, which may make clip programming unreliable.
 ## Layout
 
 ```
-psu_controller.kicad_pro / .kicad_sch / .kicad_pcb   KiCad 10 project
+tinyfan.kicad_pro / .kicad_sch / .kicad_pcb   KiCad 10 project
 gerbers/      Gerber X2 (Protel extensions) + Excellon drill, as sent to the fab
 production/   bom.csv (JLCPCB columns), bom_pcbway.csv (hand-edited, with MPNs),
-              psu_controller-all-pos.csv (JLCPCB CPL format, SMD parts only)
+              tinyfan-all-pos.csv (JLCPCB CPL format, SMD parts only)
 lib/          digispark_attiny85.kicad_sym — early Digispark symbol, not used by
               the current schematic (it uses the stock MCU_Microchip_ATtiny lib)
 firmware/     ATtiny85 sketch + Makefile (arduino-cli, ATTinyCore)
@@ -76,8 +76,8 @@ Requires `kicad-cli` from KiCad 10 on `PATH` (override with `KICAD_CLI=...`).
 
 ```sh
 make            # ERC + DRC, gerbers, drill, BOM, pos file
-make zip        # build/psu_controller-gerbers.zip for the fab
-make pdf        # build/psu_controller-schematic.pdf
+make zip        # build/tinyfan-gerbers.zip for the fab
+make pdf        # build/tinyfan-schematic.pdf
 ```
 
 ERC is clean. DRC reports 15 `silk_edge_clearance` warnings (J1 and J2

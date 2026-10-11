@@ -165,7 +165,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/f270e422-2a5b-4e06-82fb-a510054f86e5")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -323,7 +323,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/ea4a23ed-a1a3-4292-beff-0e128f0c6d34")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -1047,7 +1047,7 @@
 		(property ki_fp_filters "SOT?23*")
 		(path "/69b5ef2b-cd70-48da-9bcf-c0052d1135b1")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -1442,7 +1442,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/b7090e47-07d6-43d6-afb6-b0248257c3b2")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -1613,7 +1613,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/9cdd79d7-5ba9-4432-8886-0b8346a19c5d")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -1771,7 +1771,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/1bf10177-b9e8-4b4b-8bc1-635ad2fc2e68")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -2338,7 +2338,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/d8132562-d1be-405d-8ed6-51231118e1c1")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -2496,7 +2496,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/57af68f0-3575-46f7-a5f1-1c0f84f1a29d")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -2932,7 +2932,7 @@
 		(property ki_fp_filters "*SOIC*5.3x5.3mm*P1.27mm*")
 		(path "/b549ec55-67c5-446a-9297-64d776daba39")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")
@@ -3327,7 +3327,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/00cdeece-686d-49c7-ae85-fabde097ce3d")
 		(sheetname "/")
-		(sheetfile "psu_controller.kicad_sch")
+		(sheetfile "tinyfan.kicad_sch")
 		(units
 			(unit
 				(name "A")

@@ -1,4 +1,4 @@
-# psu_controller
+# tinyfan
 
 KiCad 10 hardware project: ATtiny85 PWM fan controller with an NTC thermistor
 input, powered from a PC PSU. Single schematic sheet, two-layer board.

@@ -3,13 +3,13 @@
 #   make deps    -> install/update the ATTinyCore board package
 #   make         -> compile, binaries land in build/
 #   make fuses   -> burn fuses for 8 MHz internal RC, BOD 4.3 V (once per chip)
-#   make flash   -> upload build/psu_controller.ino.hex with an ISP programmer
+#   make flash   -> upload build/tinyfan.ino.hex with an ISP programmer
 #
 # Programmer defaults to USBasp; override with e.g.
 #   make flash PROGRAMMER=arduinoasisp PORT=/dev/ttyUSB0
 # `arduino-cli board details -b ATTinyCore:avr:attinyx5 --list-programmers` lists the ids.
 
-SKETCH     := psu_controller
+SKETCH     := tinyfan
 BUILD_DIR  := build
 ARDUINO    ?= arduino-cli
 PROGRAMMER ?= usbasp
