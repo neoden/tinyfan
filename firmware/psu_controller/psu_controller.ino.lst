@@ -657,8 +657,8 @@ readTemp():
 /home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:83
   float r = R_FIXED * adc / (1023.0 - adc);
  27a:	20 e0       	ldi	r18, 0x00	; 0
- 27c:	30 e1       	ldi	r19, 0x10	; 16
- 27e:	44 e2       	ldi	r20, 0x24	; 36
+ 27c:	30 e4       	ldi	r19, 0x40	; 64
+ 27e:	4c e1       	ldi	r20, 0x1C	; 28
  280:	56 e4       	ldi	r21, 0x46	; 70
  282:	c7 01       	movw	r24, r14
  284:	b6 01       	movw	r22, r12

@@ -10,7 +10,7 @@
 #include <avr/wdt.h>
 
 // --- Thermistor ---
-const float R_FIXED = 10500.0;              // measured value of R2, ohms
+const float R_FIXED = 10000.0;              // R2 on the board (10k 1%); the breadboard prototype had 10.5k
 const float R0 = 10000.0, T0 = 298.15, BETA = 3435.0;
 const uint8_t NTC_PIN = A3;                 // ADC3 = PB3 (pin 2 of the SOIC-8)
 
