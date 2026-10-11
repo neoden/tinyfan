@@ -23,7 +23,39 @@ Connectors:
 | J2 | 1×4 | 1 = GND, 2 = +12 V, 3 = TACH → PB0, 4 = PWM ← Q1 collector (standard 4-pin fan order) |
 | J3 | 1×2 | 1 = NTC / ADC3, 2 = GND |
 
-PB2 and PB4 are unused. The firmware is not part of this repository.
+PB2 and PB4 are unused.
+
+## Firmware
+
+`firmware/psu_controller/psu_controller.ino` is an Arduino sketch for
+[ATTinyCore](https://github.com/SpenceKonde/ATTinyCore), built with
+`arduino-cli` (no IDE needed):
+
+```sh
+cd firmware
+make deps                 # once: install the ATTinyCore board package
+make                      # compile -> build/psu_controller.ino.hex
+make fuses PROGRAMMER=usbasp   # once per chip: 8 MHz internal RC, BOD 4.3 V
+make flash PROGRAMMER=usbasp   # upload over ISP
+```
+
+What it does, once a second:
+
+1. Reads the NTC on ADC3 (16-sample average), converts with the Beta equation
+   (10 kΩ @ 25 °C, B = 3435). Open or shorted sensor forces 100 %.
+2. PI controller around a 55 °C setpoint: duty = 20 % + 3·err + 0.05·∫err,
+   clamped to 20–100 %, integral clamped for anti-windup. Above 70 °C the fan
+   goes to 100 % immediately.
+3. Writes the duty to Timer1 PWM on PB1 at ~24 kHz. Q1 inverts it, so the
+   register value is `TOP − duty`; at 100 % the output is detached and held
+   low so Q1 is off and the fan's PWM line is released.
+
+A 2 s watchdog restarts the chip if the loop stalls; the fan runs at 100 %
+whenever PB1 is not actively driven (reset, boot, dead MCU).
+
+The board has no ISP header. Program the ATtiny85 before soldering (SOIC-8
+adapter) or with a SOIC-8 test clip. In-circuit, MISO (PB1) is loaded by
+R3 and Q1's base, which may make clip programming unreliable.
 
 ## Layout
 
@@ -34,6 +66,7 @@ production/   bom.csv (JLCPCB columns), bom_pcbway.csv (hand-edited, with MPNs),
               psu_controller-all-pos.csv (JLCPCB CPL format, SMD parts only)
 lib/          digispark_attiny85.kicad_sym — early Digispark symbol, not used by
               the current schematic (it uses the stock MCU_Microchip_ATtiny lib)
+firmware/     ATtiny85 sketch + Makefile (arduino-cli, ATTinyCore)
 Makefile      regenerates everything above with kicad-cli
 ```
 

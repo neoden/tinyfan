@@ -1,0 +1,1759 @@
+
+/home/xtal/.cache/arduino/sketches/7DE8AE9CA7E2825649DF57EE457E5DC6/psu_controller.ino.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	3b c0       	rjmp	.+118    	; 0x78 <__ctors_end>
+   2:	5e c0       	rjmp	.+188    	; 0xc0 <__bad_interrupt>
+   4:	5d c0       	rjmp	.+186    	; 0xc0 <__bad_interrupt>
+   6:	5c c0       	rjmp	.+184    	; 0xc0 <__bad_interrupt>
+   8:	5b c0       	rjmp	.+182    	; 0xc0 <__bad_interrupt>
+   a:	8d c0       	rjmp	.+282    	; 0x126 <__vector_5>
+   c:	59 c0       	rjmp	.+178    	; 0xc0 <__bad_interrupt>
+   e:	58 c0       	rjmp	.+176    	; 0xc0 <__bad_interrupt>
+  10:	57 c0       	rjmp	.+174    	; 0xc0 <__bad_interrupt>
+  12:	56 c0       	rjmp	.+172    	; 0xc0 <__bad_interrupt>
+  14:	55 c0       	rjmp	.+170    	; 0xc0 <__bad_interrupt>
+  16:	54 c0       	rjmp	.+168    	; 0xc0 <__bad_interrupt>
+  18:	53 c0       	rjmp	.+166    	; 0xc0 <__bad_interrupt>
+  1a:	52 c0       	rjmp	.+164    	; 0xc0 <__bad_interrupt>
+  1c:	51 c0       	rjmp	.+162    	; 0xc0 <__bad_interrupt>
+  1e:	08 00       	.word	0x0008	; ????
+  20:	00 00       	nop
+  22:	be 92       	st	-X, r11
+  24:	24 49       	sbci	r18, 0x94	; 148
+  26:	12 3e       	cpi	r17, 0xE2	; 226
+  28:	ab aa       	std	Y+51, r10	; 0x33
+  2a:	aa 2a       	or	r10, r26
+  2c:	be cd       	rjmp	.-1156   	; 0xfffffbaa <__eeprom_end+0xff7efbaa>
+  2e:	cc cc       	rjmp	.-1640   	; 0xfffff9c8 <__eeprom_end+0xff7ef9c8>
+  30:	4c 3e       	cpi	r20, 0xEC	; 236
+  32:	00 00       	nop
+  34:	00 80       	ld	r0, Z
+  36:	be ab       	std	Y+54, r27	; 0x36
+  38:	aa aa       	std	Y+50, r10	; 0x32
+  3a:	aa 3e       	cpi	r26, 0xEA	; 234
+  3c:	00 00       	nop
+  3e:	00 00       	nop
+  40:	bf 00       	.word	0x00bf	; ????
+  42:	00 00       	nop
+  44:	80 3f       	cpi	r24, 0xF0	; 240
+  46:	00 00       	nop
+  48:	00 00       	nop
+  4a:	00 08       	sbc	r0, r0
+  4c:	41 78       	andi	r20, 0x81	; 129
+  4e:	d3 bb       	out	0x13, r29	; 19
+  50:	43 87       	std	Z+11, r20	; 0x0b
+  52:	d1 13       	cpse	r29, r17
+  54:	3d 19       	sub	r19, r13
+  56:	0e 3c       	cpi	r16, 0xCE	; 206
+  58:	c3 bd       	out	0x23, r28	; 35
+  5a:	42 82       	std	Z+2, r4	; 0x02
+  5c:	ad 2b       	or	r26, r29
+  5e:	3e 68       	ori	r19, 0x8E	; 142
+  60:	ec 82       	std	Y+4, r14	; 0x04
+  62:	76 be       	out	0x36, r7	; 54
+  64:	d9 8f       	std	Y+25, r29	; 0x19
+  66:	e1 a9       	ldd	r30, Z+49	; 0x31
+  68:	3e 4c       	sbci	r19, 0xCE	; 206
+  6a:	80 ef       	ldi	r24, 0xF0	; 240
+  6c:	ff be       	out	0x3f, r15	; 63
+  6e:	01 c4       	rjmp	.+2050   	; 0x872 <log+0x28>
+  70:	ff 7f       	andi	r31, 0xFF	; 255
+  72:	3f 00       	.word	0x003f	; ????
+  74:	00 00       	nop
+	...
+
+00000078 <__ctors_end>:
+__trampolines_start():
+  78:	11 24       	eor	r1, r1
+  7a:	1f be       	out	0x3f, r1	; 63
+  7c:	cf e5       	ldi	r28, 0x5F	; 95
+  7e:	d2 e0       	ldi	r29, 0x02	; 2
+  80:	de bf       	out	0x3e, r29	; 62
+  82:	cd bf       	out	0x3d, r28	; 61
+
+00000084 <wdt_init()>:
+_Z8wdt_initv():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:49
+// After a watchdog reset the ATtiny85 keeps the watchdog enabled with the
+// shortest (16 ms) timeout. Clear it before the Arduino core and setup() run,
+// otherwise the chip can get stuck in a reset loop.
+void wdt_init(void) __attribute__((naked, used, section(".init3")));
+void wdt_init(void) {
+  MCUSR = 0;
+  84:	14 be       	out	0x34, r1	; 52
+wdt_disable():
+/home/xtal/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/avr/wdt.h:510
+				"out __SREG__,__tmp_reg__"   "\n\t"
+				: [TEMPREG] "=d" (temp_reg)
+				: [WDTREG]  "I"  (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+				[WDCE_WDE]  "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
+				: "r0"
+		);
+  86:	0f b6       	in	r0, 0x3f	; 63
+  88:	f8 94       	cli
+  8a:	a8 95       	wdr
+  8c:	81 b5       	in	r24, 0x21	; 33
+  8e:	88 61       	ori	r24, 0x18	; 24
+  90:	81 bd       	out	0x21, r24	; 33
+  92:	11 bc       	out	0x21, r1	; 33
+  94:	0f be       	out	0x3f, r0	; 63
+
+00000096 <__do_copy_data>:
+__do_copy_data():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2409
+  96:	10 e0       	ldi	r17, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2410
+  98:	a0 e6       	ldi	r26, 0x60	; 96
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2411
+  9a:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2412
+  9c:	ea e0       	ldi	r30, 0x0A	; 10
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2413
+  9e:	fa e0       	ldi	r31, 0x0A	; 10
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2414
+  a0:	02 c0       	rjmp	.+4      	; 0xa6 <__do_copy_data+0x10>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2417
+  a2:	05 90       	lpm	r0, Z+
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2422
+  a4:	0d 92       	st	X+, r0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2424
+  a6:	a4 36       	cpi	r26, 0x64	; 100
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2425
+  a8:	b1 07       	cpc	r27, r17
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2426
+  aa:	d9 f7       	brne	.-10     	; 0xa2 <__do_copy_data+0xc>
+
+000000ac <__do_clear_bss>:
+__do_clear_bss():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2441
+  ac:	20 e0       	ldi	r18, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2442
+  ae:	a4 e6       	ldi	r26, 0x64	; 100
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2443
+  b0:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2444
+  b2:	01 c0       	rjmp	.+2      	; 0xb6 <.do_clear_bss_start>
+
+000000b4 <.do_clear_bss_loop>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2446
+  b4:	1d 92       	st	X+, r1
+
+000000b6 <.do_clear_bss_start>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
+  b6:	a1 37       	cpi	r26, 0x71	; 113
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2449
+  b8:	b2 07       	cpc	r27, r18
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2450
+  ba:	e1 f7       	brne	.-8      	; 0xb4 <.do_clear_bss_loop>
+.do_clear_bss_start():
+  bc:	7e d0       	rcall	.+252    	; 0x1ba <main>
+  be:	a3 c4       	rjmp	.+2374   	; 0xa06 <_exit>
+
+000000c0 <__bad_interrupt>:
+__vector_1():
+  c0:	9f cf       	rjmp	.-194    	; 0x0 <__vectors>
+
+000000c2 <micros>:
+micros():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:360
+    unsigned int r; // needed for some frequencies, optimized away otherwise
+    unsigned char f; // temporary storage for millis fraction counter
+    unsigned char q = 0; // record whether an overflow is flagged
+#endif
+    unsigned long m;
+    uint8_t t, oldSREG = SREG;
+  c2:	3f b7       	in	r19, 0x3f	; 63
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:362
+
+    cli();
+  c4:	f8 94       	cli
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:367
+#ifdef CORRECT_EXACT_MICROS
+    m = millis_timer_millis;
+    f = millis_timer_fract;
+#else
+    m = millis_timer_overflow_count;
+  c6:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <millis_timer_overflow_count>
+  ca:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <millis_timer_overflow_count+0x1>
+  ce:	a0 91 6f 00 	lds	r26, 0x006F	; 0x80006f <millis_timer_overflow_count+0x2>
+  d2:	b0 91 70 00 	lds	r27, 0x0070	; 0x800070 <millis_timer_overflow_count+0x3>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:370
+#endif
+  #if defined(TCNT0) && (TIMER_TO_USE_FOR_MILLIS == 0) && !defined(TCW0)
+    t = TCNT0;
+  d6:	22 b7       	in	r18, 0x32	; 50
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:389
+      m++;
+    #else
+      q = 1;
+    #endif
+  #elif defined(TIFR) && (TIMER_TO_USE_FOR_MILLIS == 0)
+    if ((TIFR & _BV(TOV0)) && (t < 255))
+  d8:	08 b6       	in	r0, 0x38	; 56
+  da:	01 fe       	sbrs	r0, 1
+  dc:	05 c0       	rjmp	.+10     	; 0xe8 <micros+0x26>
+  de:	2f 3f       	cpi	r18, 0xFF	; 255
+  e0:	19 f0       	breq	.+6      	; 0xe8 <micros+0x26>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:391
+    #ifndef CORRECT_EXACT_MICROS
+      m++;
+  e2:	01 96       	adiw	r24, 0x01	; 1
+  e4:	a1 1d       	adc	r26, r1
+  e6:	b1 1d       	adc	r27, r1
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:411
+    #else
+      q = 1;
+    #endif
+  #endif
+
+    SREG = oldSREG;
+  e8:	3f bf       	out	0x3f, r19	; 63
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:453
+  #else
+  #if F_CPU < 1000000L
+    return ((m << 8) + t) * MillisTimer_Prescale_Value * (1000000L/F_CPU);
+  #else
+    #if (MillisTimer_Prescale_Value % clockCyclesPerMicrosecond() == 0 && (F_CPU % 1000000 == 0 )) // Can we just do it the naive way? If so great!
+      return ((m << 8) + t) * (MillisTimer_Prescale_Value / clockCyclesPerMicrosecond());
+  ea:	ba 2f       	mov	r27, r26
+  ec:	a9 2f       	mov	r26, r25
+  ee:	98 2f       	mov	r25, r24
+  f0:	88 27       	eor	r24, r24
+  f2:	bc 01       	movw	r22, r24
+  f4:	cd 01       	movw	r24, r26
+  f6:	62 0f       	add	r22, r18
+  f8:	71 1d       	adc	r23, r1
+  fa:	81 1d       	adc	r24, r1
+  fc:	91 1d       	adc	r25, r1
+  fe:	43 e0       	ldi	r20, 0x03	; 3
+ 100:	66 0f       	add	r22, r22
+ 102:	77 1f       	adc	r23, r23
+ 104:	88 1f       	adc	r24, r24
+ 106:	99 1f       	adc	r25, r25
+ 108:	4a 95       	dec	r20
+ 10a:	d1 f7       	brne	.-12     	; 0x100 <micros+0x3e>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:508
+      //return ((m << 8 )/clockCyclesPerMicrosecond()* MillisTimer_Prescale_Value) + ((t+(((m<<8)%clockCyclesPerMicrosecond())) * MillisTimer_Prescale_Value / clockCyclesPerMicrosecond()));
+      return ((m << 8 )/clockCyclesPerMicrosecond()* MillisTimer_Prescale_Value) + (t * MillisTimer_Prescale_Value / clockCyclesPerMicrosecond());
+    #endif
+  #endif
+  #endif // !CORRECT_EXACT_MICROS
+  }
+ 10c:	08 95       	ret
+
+0000010e <digitalWrite.constprop.3>:
+digitalWrite.constprop.3():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:107
+    } else
+  #else
+    // Timer1 for non-x61/x7
+    #if defined(TCCR1) && defined(COM1A1) // x5
+      if(timer == TIMER1A){
+        TCCR1 &= ~(1<<COM1A1);
+ 10e:	80 b7       	in	r24, 0x30	; 48
+ 110:	8f 7d       	andi	r24, 0xDF	; 223
+ 112:	80 bf       	out	0x30, r24	; 48
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:153
+  if (timer != NOT_ON_TIMER) turnOffPWM(timer);
+
+  out = portOutputRegister(port);
+
+  if (val == LOW) {
+    uint8_t oldSREG = SREG;
+ 114:	8f b7       	in	r24, 0x3f	; 63
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:154
+    cli();
+ 116:	f8 94       	cli
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:155
+    *out &= ~bit;
+ 118:	c1 98       	cbi	0x18, 1	; 24
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:156
+    SREG = oldSREG;
+ 11a:	8f bf       	out	0x3f, r24	; 63
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:163
+    uint8_t oldSREG = SREG;
+    cli();
+    *out |= bit;
+    SREG = oldSREG;
+  }
+}
+ 11c:	08 95       	ret
+
+0000011e <setFan(float) [clone .part.0]>:
+_Z6setFanf.part.0():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:59
+void setFan(float d) {
+  uint8_t counts = (uint8_t)(d + 0.5);
+  if (counts >= PWM_TOP) {
+    // Full speed: detach the compare output and hold PB1 low so Q1 stays off.
+    // Avoids relying on OCR1A = 0 edge behaviour.
+    TCCR1 &= ~(_BV(COM1A1) | _BV(COM1A0));
+ 11e:	80 b7       	in	r24, 0x30	; 48
+ 120:	8f 7c       	andi	r24, 0xCF	; 207
+ 122:	80 bf       	out	0x30, r24	; 48
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:60
+    digitalWrite(FAN_PIN, LOW);
+ 124:	f4 cf       	rjmp	.-24     	; 0x10e <digitalWrite.constprop.3>
+
+00000126 <__vector_5>:
+__vector_5():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:308
+      #error "cannot find Millis() timer overflow vector"
+    #endif
+  #else
+    #error "Millis() timer not defined!"
+  #endif
+  {
+ 126:	1f 92       	push	r1
+ 128:	0f 92       	push	r0
+ 12a:	0f b6       	in	r0, 0x3f	; 63
+ 12c:	0f 92       	push	r0
+ 12e:	11 24       	eor	r1, r1
+ 130:	2f 93       	push	r18
+ 132:	3f 93       	push	r19
+ 134:	8f 93       	push	r24
+ 136:	9f 93       	push	r25
+ 138:	af 93       	push	r26
+ 13a:	bf 93       	push	r27
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:311
+    // copy these to local variables so they can be stored in registers
+    // (volatile variables must be read from memory on every access)
+    unsigned long m = millis_timer_millis;
+ 13c:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <millis_timer_millis>
+ 140:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <millis_timer_millis+0x1>
+ 144:	a0 91 6b 00 	lds	r26, 0x006B	; 0x80006b <millis_timer_millis+0x2>
+ 148:	b0 91 6c 00 	lds	r27, 0x006C	; 0x80006c <millis_timer_millis+0x3>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:312
+    unsigned char f = millis_timer_fract;
+ 14c:	30 91 68 00 	lds	r19, 0x0068	; 0x800068 <millis_timer_fract>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:319
+    static unsigned char correct_exact = 0;     // rollover intended
+    if (++correct_exact < CORRECT_EXACT_MANY) {
+      ++f;
+    }
+#endif
+    f += FRACT_INC;
+ 150:	26 e0       	ldi	r18, 0x06	; 6
+ 152:	23 0f       	add	r18, r19
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:321
+
+    if (f >= FRACT_MAX)
+ 154:	2d 37       	cpi	r18, 0x7D	; 125
+ 156:	68 f1       	brcs	.+90     	; 0x1b2 <__vector_5+0x8c>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:323
+    {
+      f -= FRACT_MAX;
+ 158:	29 e8       	ldi	r18, 0x89	; 137
+ 15a:	23 0f       	add	r18, r19
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:324
+      m += MILLIS_INC + 1;
+ 15c:	03 96       	adiw	r24, 0x03	; 3
+ 15e:	a1 1d       	adc	r26, r1
+ 160:	b1 1d       	adc	r27, r1
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:331
+    else
+    {
+      m += MILLIS_INC;
+    }
+
+    millis_timer_fract = f;
+ 162:	20 93 68 00 	sts	0x0068, r18	; 0x800068 <millis_timer_fract>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:332
+    millis_timer_millis = m;
+ 166:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <millis_timer_millis>
+ 16a:	90 93 6a 00 	sts	0x006A, r25	; 0x80006a <millis_timer_millis+0x1>
+ 16e:	a0 93 6b 00 	sts	0x006B, r26	; 0x80006b <millis_timer_millis+0x2>
+ 172:	b0 93 6c 00 	sts	0x006C, r27	; 0x80006c <millis_timer_millis+0x3>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:334
+#ifndef CORRECT_EXACT_MICROS
+    millis_timer_overflow_count++;
+ 176:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <millis_timer_overflow_count>
+ 17a:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <millis_timer_overflow_count+0x1>
+ 17e:	a0 91 6f 00 	lds	r26, 0x006F	; 0x80006f <millis_timer_overflow_count+0x2>
+ 182:	b0 91 70 00 	lds	r27, 0x0070	; 0x800070 <millis_timer_overflow_count+0x3>
+ 186:	01 96       	adiw	r24, 0x01	; 1
+ 188:	a1 1d       	adc	r26, r1
+ 18a:	b1 1d       	adc	r27, r1
+ 18c:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <millis_timer_overflow_count>
+ 190:	90 93 6e 00 	sts	0x006E, r25	; 0x80006e <millis_timer_overflow_count+0x1>
+ 194:	a0 93 6f 00 	sts	0x006F, r26	; 0x80006f <millis_timer_overflow_count+0x2>
+ 198:	b0 93 70 00 	sts	0x0070, r27	; 0x800070 <millis_timer_overflow_count+0x3>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:336
+#endif
+  }
+ 19c:	bf 91       	pop	r27
+ 19e:	af 91       	pop	r26
+ 1a0:	9f 91       	pop	r25
+ 1a2:	8f 91       	pop	r24
+ 1a4:	3f 91       	pop	r19
+ 1a6:	2f 91       	pop	r18
+ 1a8:	0f 90       	pop	r0
+ 1aa:	0f be       	out	0x3f, r0	; 63
+ 1ac:	0f 90       	pop	r0
+ 1ae:	1f 90       	pop	r1
+ 1b0:	18 95       	reti
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:328
+      f -= FRACT_MAX;
+      m += MILLIS_INC + 1;
+    }
+    else
+    {
+      m += MILLIS_INC;
+ 1b2:	02 96       	adiw	r24, 0x02	; 2
+ 1b4:	a1 1d       	adc	r26, r1
+ 1b6:	b1 1d       	adc	r27, r1
+ 1b8:	d4 cf       	rjmp	.-88     	; 0x162 <__vector_5+0x3c>
+
+000001ba <main>:
+main():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1138
+*/
+
+  // Use the Millis Timer for fast PWM (unless it doesn't have an output).
+  #if (TIMER_TO_USE_FOR_MILLIS == 0)
+    #if defined(WGM01) // if Timer0 has PWM
+      TCCR0A = (1<<WGM01) | (1<<WGM00);
+ 1ba:	83 e0       	ldi	r24, 0x03	; 3
+ 1bc:	8a bd       	out	0x2a, r24	; 42
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1141
+    #endif
+    #if defined(TCCR0B) //The x61 has a wacky Timer0!
+      TCCR0B = (MillisTimer_Prescale_Index << CS00);
+ 1be:	83 bf       	out	0x33, r24	; 51
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1162
+    TCCR1A = 1<<WGM10;
+    TCCR1B = (1<<WGM12) | (MillisTimer_Prescale_Index << CS10);
+  #endif
+
+  // this needs to be called before setup() or some functions won't work there
+  sei();
+ 1c0:	78 94       	sei
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1167
+
+  #ifndef DISABLEMILLIS
+    // Enable the overflow interrupt (this is the basic system tic-toc for millis)
+    #if defined(TIMSK) && defined(TOIE0) && (TIMER_TO_USE_FOR_MILLIS == 0)
+      sbi(TIMSK, TOIE0);
+ 1c2:	89 b7       	in	r24, 0x39	; 57
+ 1c4:	82 60       	ori	r24, 0x02	; 2
+ 1c6:	89 bf       	out	0x39, r24	; 57
+initToneTimerInternal():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:958
+    #elif defined(__AVR_ATtiny43__)
+      TCCR1A = 3; //WGM 10=1, WGM11=1
+      TCCR1B = 3; //prescaler of 64
+    #elif (TIMER_TO_USE_FOR_TONE == 1) && defined(TCCR1) // ATtiny x5
+      // Use the Tone Timer for fast PWM as phase correct not supported by this timer
+      GTCCR = (1<<PWM1B);
+ 1c8:	80 e4       	ldi	r24, 0x40	; 64
+ 1ca:	8c bd       	out	0x2c, r24	; 44
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:959
+      OCR1C = 0xFF; //Use 255 as the top to match with the others as this module doesn't have a 8bit PWM mode.
+ 1cc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1ce:	8d bd       	out	0x2d, r24	; 45
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:960
+      TCCR1 = (1<<CTC1) | (1<<PWM1A) | (ToneTimer_Prescale_Index << CS10);
+ 1d0:	87 ec       	ldi	r24, 0xC7	; 199
+ 1d2:	80 bf       	out	0x30, r24	; 48
+main():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1214
+  #if defined( INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER ) && INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER
+    #if defined(ADCSRA)
+      // set a2d prescale factor
+      // ADCSRA = (ADCSRA & ~((1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0))) | (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
+      // dude, this is being called on startup. We know that ADCSRA is 0! Why add a RMW cycle?!
+      ADCSRA = (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
+ 1d4:	86 e8       	ldi	r24, 0x86	; 134
+ 1d6:	86 b9       	out	0x06, r24	; 6
+pinMode():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:57
+                cli();
+    *reg &= ~bit;
+    *out |= bit;
+    SREG = oldSREG;
+  } else {
+    uint8_t oldSREG = SREG;
+ 1d8:	8f b7       	in	r24, 0x3f	; 63
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:58
+                cli();
+ 1da:	f8 94       	cli
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:59
+    *reg |= bit;
+ 1dc:	b9 9a       	sbi	0x17, 1	; 23
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_digital.c:60
+    SREG = oldSREG;
+ 1de:	8f bf       	out	0x3f, r24	; 63
+setup():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:69
+  }
+}
+
+void setup() {
+  pinMode(FAN_PIN, OUTPUT);
+  digitalWrite(FAN_PIN, LOW);               // Q1 off -> fan at 100% until the loop takes over
+ 1e0:	96 df       	rcall	.-212    	; 0x10e <digitalWrite.constprop.3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:70
+  PLLCSR &= ~_BV(PCKE);                     // Timer1 from the system clock, not the PLL
+ 1e2:	87 b5       	in	r24, 0x27	; 39
+ 1e4:	8b 7f       	andi	r24, 0xFB	; 251
+ 1e6:	87 bd       	out	0x27, r24	; 39
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:71
+  TCCR1 = _BV(PWM1A) | T1_PRESCALE;         // PWM on OC1A, TOP = OCR1C
+ 1e8:	83 e4       	ldi	r24, 0x43	; 67
+ 1ea:	80 bf       	out	0x30, r24	; 48
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:72
+  OCR1C = PWM_TOP;
+ 1ec:	81 e5       	ldi	r24, 0x51	; 81
+ 1ee:	8d bd       	out	0x2d, r24	; 45
+setFan():
+ 1f0:	96 df       	rcall	.-212    	; 0x11e <setFan(float) [clone .part.0]>
+wdt_enable():
+/home/xtal/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/avr/wdt.h:469
+				: "I" (_SFR_IO_ADDR(_WD_CONTROL_REG)),
+				"r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
+				"r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) |
+						_BV(WDE) | (value & 0x07)) )
+				: "r0"
+		);
+ 1f2:	88 e1       	ldi	r24, 0x18	; 24
+ 1f4:	9f e0       	ldi	r25, 0x0F	; 15
+ 1f6:	0f b6       	in	r0, 0x3f	; 63
+ 1f8:	f8 94       	cli
+ 1fa:	a8 95       	wdr
+ 1fc:	81 bd       	out	0x21, r24	; 33
+ 1fe:	0f be       	out	0x3f, r0	; 63
+ 200:	91 bd       	out	0x21, r25	; 33
+analogRead():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:72
+  #ifndef ADCSRA
+  return digitalRead(analogInputToDigitalPin(pin)) ? 1023 : 0; //No ADC, so read as a digital pin instead.
+  #endif
+
+  #if defined(ADMUX)
+  ADMUX = ((analog_reference & ADMUX_REFS_MASK) << REFS0) | ((pin & ADMUX_MUX_MASK) << MUX0); //select the channel and reference
+ 202:	d3 e0       	ldi	r29, 0x03	; 3
+loop():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:95
+  float err = t - T_TARGET;
+  const float maxI = (PWM_TOP - DUTY_MIN) / KI;
+
+  if (t > T_PANIC) {
+    duty = PWM_TOP;
+    integral = maxI;
+ 204:	81 2c       	mov	r8, r1
+ 206:	90 e8       	ldi	r25, 0x80	; 128
+ 208:	99 2e       	mov	r9, r25
+ 20a:	92 ea       	ldi	r25, 0xA2	; 162
+ 20c:	a9 2e       	mov	r10, r25
+ 20e:	94 e4       	ldi	r25, 0x44	; 68
+ 210:	b9 2e       	mov	r11, r25
+setFan():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:62
+    // Full speed: detach the compare output and hold PB1 low so Q1 stays off.
+    // Avoids relying on OCR1A = 0 edge behaviour.
+    TCCR1 &= ~(_BV(COM1A1) | _BV(COM1A0));
+    digitalWrite(FAN_PIN, LOW);
+  } else {
+    OCR1A = PWM_TOP - counts;
+ 212:	c1 e5       	ldi	r28, 0x51	; 81
+loop():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:88
+  float r = R_FIXED * adc / (1023.0 - adc);
+  return 1.0 / (1.0 / T0 + log(r / R0) / BETA) - 273.15;
+}
+
+void loop() {
+  wdt_reset();
+ 214:	a8 95       	wdr
+ 216:	20 e1       	ldi	r18, 0x10	; 16
+ 218:	30 e0       	ldi	r19, 0x00	; 0
+main():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:79
+  wdt_enable(WDTO_2S);
+}
+
+// Returns 999 when the sensor reads open or shorted, which forces 100%.
+float readTemp() {
+  long sum = 0;
+ 21a:	40 e0       	ldi	r20, 0x00	; 0
+ 21c:	50 e0       	ldi	r21, 0x00	; 0
+ 21e:	ba 01       	movw	r22, r20
+analogRead():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:72
+ 220:	d7 b9       	out	0x07, r29	; 7
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:74
+  #if defined(REFS2)
+  ADMUX |= (((analog_reference & 0x04) >> 2) << REFS2); //some have an extra reference bit in a weird position.
+ 222:	87 b1       	in	r24, 0x07	; 7
+ 224:	87 b9       	out	0x07, r24	; 7
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:79
+  #endif
+  #endif
+
+  #if defined(HAVE_ADC) && HAVE_ADC
+  sbi(ADCSRA, ADSC); //Start conversion
+ 226:	36 9a       	sbi	0x06, 6	; 6
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:81
+
+  while(ADCSRA & (1<<ADSC)); //Wait for conversion to complete.
+ 228:	36 99       	sbic	0x06, 6	; 6
+ 22a:	fe cf       	rjmp	.-4      	; 0x228 <main+0x6e>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:83
+
+  uint8_t low = ADCL;
+ 22c:	84 b1       	in	r24, 0x04	; 4
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring_analog.c:84
+  uint8_t high = ADCH;
+ 22e:	95 b1       	in	r25, 0x05	; 5
+readTemp():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:80
+  for (int i = 0; i < 16; i++) sum += analogRead(NTC_PIN);
+ 230:	09 2e       	mov	r0, r25
+ 232:	00 0c       	add	r0, r0
+ 234:	aa 0b       	sbc	r26, r26
+ 236:	bb 0b       	sbc	r27, r27
+ 238:	48 0f       	add	r20, r24
+ 23a:	59 1f       	adc	r21, r25
+ 23c:	6a 1f       	adc	r22, r26
+ 23e:	7b 1f       	adc	r23, r27
+ 240:	21 50       	subi	r18, 0x01	; 1
+ 242:	31 09       	sbc	r19, r1
+ 244:	69 f7       	brne	.-38     	; 0x220 <main+0x66>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:81
+  float adc = sum / 16.0;
+ 246:	cb 01       	movw	r24, r22
+ 248:	ba 01       	movw	r22, r20
+ 24a:	46 d2       	rcall	.+1164   	; 0x6d8 <__floatsisf>
+ 24c:	20 e0       	ldi	r18, 0x00	; 0
+ 24e:	30 e0       	ldi	r19, 0x00	; 0
+ 250:	40 e8       	ldi	r20, 0x80	; 128
+ 252:	5d e3       	ldi	r21, 0x3D	; 61
+ 254:	3a d3       	rcall	.+1652   	; 0x8ca <__mulsf3>
+ 256:	6b 01       	movw	r12, r22
+ 258:	7c 01       	movw	r14, r24
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:82
+  if (adc < 20 || adc > 1000) return 999;
+ 25a:	20 e0       	ldi	r18, 0x00	; 0
+ 25c:	30 e0       	ldi	r19, 0x00	; 0
+ 25e:	40 ea       	ldi	r20, 0xA0	; 160
+ 260:	51 e4       	ldi	r21, 0x41	; 65
+ 262:	a0 d1       	rcall	.+832    	; 0x5a4 <__cmpsf2>
+ 264:	87 fd       	sbrc	r24, 7
+ 266:	44 c0       	rjmp	.+136    	; 0x2f0 <__stack+0x91>
+ 268:	20 e0       	ldi	r18, 0x00	; 0
+ 26a:	30 e0       	ldi	r19, 0x00	; 0
+ 26c:	4a e7       	ldi	r20, 0x7A	; 122
+ 26e:	54 e4       	ldi	r21, 0x44	; 68
+ 270:	c7 01       	movw	r24, r14
+ 272:	b6 01       	movw	r22, r12
+ 274:	e1 d2       	rcall	.+1474   	; 0x838 <__gesf2>
+ 276:	18 16       	cp	r1, r24
+ 278:	dc f1       	brlt	.+118    	; 0x2f0 <__stack+0x91>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:83
+  float r = R_FIXED * adc / (1023.0 - adc);
+ 27a:	20 e0       	ldi	r18, 0x00	; 0
+ 27c:	30 e1       	ldi	r19, 0x10	; 16
+ 27e:	44 e2       	ldi	r20, 0x24	; 36
+ 280:	56 e4       	ldi	r21, 0x46	; 70
+ 282:	c7 01       	movw	r24, r14
+ 284:	b6 01       	movw	r22, r12
+ 286:	21 d3       	rcall	.+1602   	; 0x8ca <__mulsf3>
+ 288:	2b 01       	movw	r4, r22
+ 28a:	3c 01       	movw	r6, r24
+ 28c:	a7 01       	movw	r20, r14
+ 28e:	96 01       	movw	r18, r12
+ 290:	60 e0       	ldi	r22, 0x00	; 0
+ 292:	70 ec       	ldi	r23, 0xC0	; 192
+ 294:	8f e7       	ldi	r24, 0x7F	; 127
+ 296:	94 e4       	ldi	r25, 0x44	; 68
+ 298:	20 d1       	rcall	.+576    	; 0x4da <__subsf3>
+ 29a:	9b 01       	movw	r18, r22
+ 29c:	ac 01       	movw	r20, r24
+ 29e:	c3 01       	movw	r24, r6
+ 2a0:	b2 01       	movw	r22, r4
+ 2a2:	84 d1       	rcall	.+776    	; 0x5ac <__divsf3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:84
+  return 1.0 / (1.0 / T0 + log(r / R0) / BETA) - 273.15;
+ 2a4:	20 e0       	ldi	r18, 0x00	; 0
+ 2a6:	30 e4       	ldi	r19, 0x40	; 64
+ 2a8:	4c e1       	ldi	r20, 0x1C	; 28
+ 2aa:	56 e4       	ldi	r21, 0x46	; 70
+ 2ac:	7f d1       	rcall	.+766    	; 0x5ac <__divsf3>
+ 2ae:	cd d2       	rcall	.+1434   	; 0x84a <log>
+ 2b0:	20 e0       	ldi	r18, 0x00	; 0
+ 2b2:	30 eb       	ldi	r19, 0xB0	; 176
+ 2b4:	46 e5       	ldi	r20, 0x56	; 86
+ 2b6:	55 e4       	ldi	r21, 0x45	; 69
+ 2b8:	79 d1       	rcall	.+754    	; 0x5ac <__divsf3>
+ 2ba:	2f e0       	ldi	r18, 0x0F	; 15
+ 2bc:	3f ec       	ldi	r19, 0xCF	; 207
+ 2be:	4b e5       	ldi	r20, 0x5B	; 91
+ 2c0:	5b e3       	ldi	r21, 0x3B	; 59
+ 2c2:	0c d1       	rcall	.+536    	; 0x4dc <__addsf3>
+ 2c4:	9b 01       	movw	r18, r22
+ 2c6:	ac 01       	movw	r20, r24
+ 2c8:	60 e0       	ldi	r22, 0x00	; 0
+ 2ca:	70 e0       	ldi	r23, 0x00	; 0
+ 2cc:	80 e8       	ldi	r24, 0x80	; 128
+ 2ce:	9f e3       	ldi	r25, 0x3F	; 63
+ 2d0:	6d d1       	rcall	.+730    	; 0x5ac <__divsf3>
+ 2d2:	23 e3       	ldi	r18, 0x33	; 51
+ 2d4:	33 e9       	ldi	r19, 0x93	; 147
+ 2d6:	48 e8       	ldi	r20, 0x88	; 136
+ 2d8:	53 e4       	ldi	r21, 0x43	; 67
+ 2da:	ff d0       	rcall	.+510    	; 0x4da <__subsf3>
+ 2dc:	6b 01       	movw	r12, r22
+ 2de:	7c 01       	movw	r14, r24
+loop():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:93
+  wdt_reset();
+  float t = readTemp();
+  float err = t - T_TARGET;
+  const float maxI = (PWM_TOP - DUTY_MIN) / KI;
+
+  if (t > T_PANIC) {
+ 2e0:	20 e0       	ldi	r18, 0x00	; 0
+ 2e2:	30 e0       	ldi	r19, 0x00	; 0
+ 2e4:	4c e8       	ldi	r20, 0x8C	; 140
+ 2e6:	52 e4       	ldi	r21, 0x42	; 66
+ 2e8:	a7 d2       	rcall	.+1358   	; 0x838 <__gesf2>
+ 2ea:	18 16       	cp	r1, r24
+ 2ec:	0c f0       	brlt	.+2      	; 0x2f0 <__stack+0x91>
+ 2ee:	7b c0       	rjmp	.+246    	; 0x3e6 <__stack+0x187>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:94
+    duty = PWM_TOP;
+ 2f0:	80 e0       	ldi	r24, 0x00	; 0
+ 2f2:	90 e0       	ldi	r25, 0x00	; 0
+ 2f4:	a2 ea       	ldi	r26, 0xA2	; 162
+ 2f6:	b2 e4       	ldi	r27, 0x42	; 66
+ 2f8:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2fc:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 300:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 304:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:95
+    integral = maxI;
+ 308:	80 92 64 00 	sts	0x0064, r8	; 0x800064 <__data_end>
+ 30c:	90 92 65 00 	sts	0x0065, r9	; 0x800065 <__data_end+0x1>
+ 310:	a0 92 66 00 	sts	0x0066, r10	; 0x800066 <__data_end+0x2>
+ 314:	b0 92 67 00 	sts	0x0067, r11	; 0x800067 <__data_end+0x3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:103
+    if (integral > maxI) integral = maxI;   // anti-windup
+    if (integral < 0)    integral = 0;
+    duty = DUTY_MIN + KP * err + KI * integral;
+  }
+
+  if (duty > PWM_TOP)  duty = PWM_TOP;
+ 318:	20 e0       	ldi	r18, 0x00	; 0
+ 31a:	30 e0       	ldi	r19, 0x00	; 0
+ 31c:	42 ea       	ldi	r20, 0xA2	; 162
+ 31e:	52 e4       	ldi	r21, 0x42	; 66
+ 320:	60 91 60 00 	lds	r22, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 324:	70 91 61 00 	lds	r23, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 328:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 32c:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 330:	83 d2       	rcall	.+1286   	; 0x838 <__gesf2>
+ 332:	18 16       	cp	r1, r24
+ 334:	64 f4       	brge	.+24     	; 0x34e <__stack+0xef>
+ 336:	80 e0       	ldi	r24, 0x00	; 0
+ 338:	90 e0       	ldi	r25, 0x00	; 0
+ 33a:	a2 ea       	ldi	r26, 0xA2	; 162
+ 33c:	b2 e4       	ldi	r27, 0x42	; 66
+ 33e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 342:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 346:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 34a:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:104
+  if (duty < DUTY_MIN) duty = DUTY_MIN;
+ 34e:	20 e0       	ldi	r18, 0x00	; 0
+ 350:	30 e0       	ldi	r19, 0x00	; 0
+ 352:	40 e8       	ldi	r20, 0x80	; 128
+ 354:	51 e4       	ldi	r21, 0x41	; 65
+ 356:	60 91 60 00 	lds	r22, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 35a:	70 91 61 00 	lds	r23, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 35e:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 362:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 366:	1e d1       	rcall	.+572    	; 0x5a4 <__cmpsf2>
+ 368:	87 ff       	sbrs	r24, 7
+ 36a:	0c c0       	rjmp	.+24     	; 0x384 <__stack+0x125>
+ 36c:	80 e0       	ldi	r24, 0x00	; 0
+ 36e:	90 e0       	ldi	r25, 0x00	; 0
+ 370:	a0 e8       	ldi	r26, 0x80	; 128
+ 372:	b1 e4       	ldi	r27, 0x41	; 65
+ 374:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 378:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 37c:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 380:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+setFan():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:55
+  wdt_disable();
+}
+
+// d is the fan duty in timer counts, 0..PWM_TOP.
+void setFan(float d) {
+  uint8_t counts = (uint8_t)(d + 0.5);
+ 384:	20 e0       	ldi	r18, 0x00	; 0
+ 386:	30 e0       	ldi	r19, 0x00	; 0
+ 388:	40 e0       	ldi	r20, 0x00	; 0
+ 38a:	5f e3       	ldi	r21, 0x3F	; 63
+ 38c:	60 91 60 00 	lds	r22, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 390:	70 91 61 00 	lds	r23, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 394:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 398:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 39c:	9f d0       	rcall	.+318    	; 0x4dc <__addsf3>
+ 39e:	6e d1       	rcall	.+732    	; 0x67c <__fixunssfsi>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:56
+  if (counts >= PWM_TOP) {
+ 3a0:	61 35       	cpi	r22, 0x51	; 81
+ 3a2:	08 f4       	brcc	.+2      	; 0x3a6 <__stack+0x147>
+ 3a4:	8c c0       	rjmp	.+280    	; 0x4be <__LOCK_REGION_LENGTH__+0xbe>
+ 3a6:	bb de       	rcall	.-650    	; 0x11e <setFan(float) [clone .part.0]>
+delay():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:518
+  void yield(void) __attribute__ ((weak, alias("__empty")));
+
+  void delay(unsigned long ms)
+  {
+    #if (F_CPU>=1000000L)
+    uint16_t start = (uint16_t)micros();
+ 3a8:	8c de       	rcall	.-744    	; 0xc2 <micros>
+ 3aa:	7b 01       	movw	r14, r22
+ 3ac:	88 ee       	ldi	r24, 0xE8	; 232
+ 3ae:	48 2e       	mov	r4, r24
+ 3b0:	83 e0       	ldi	r24, 0x03	; 3
+ 3b2:	58 2e       	mov	r5, r24
+ 3b4:	61 2c       	mov	r6, r1
+ 3b6:	71 2c       	mov	r7, r1
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:522
+
+    while (ms > 0) {
+      yield();
+      while (((uint16_t)micros() - start) >= 1000 && ms) {
+ 3b8:	84 de       	rcall	.-760    	; 0xc2 <micros>
+ 3ba:	6e 19       	sub	r22, r14
+ 3bc:	7f 09       	sbc	r23, r15
+ 3be:	68 3e       	cpi	r22, 0xE8	; 232
+ 3c0:	73 40       	sbci	r23, 0x03	; 3
+ 3c2:	08 f4       	brcc	.+2      	; 0x3c6 <__stack+0x167>
+ 3c4:	83 c0       	rjmp	.+262    	; 0x4cc <__LOCK_REGION_LENGTH__+0xcc>
+ 3c6:	41 14       	cp	r4, r1
+ 3c8:	51 04       	cpc	r5, r1
+ 3ca:	61 04       	cpc	r6, r1
+ 3cc:	71 04       	cpc	r7, r1
+ 3ce:	09 f4       	brne	.+2      	; 0x3d2 <__stack+0x173>
+ 3d0:	21 cf       	rjmp	.-446    	; 0x214 <main+0x5a>
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:523
+        ms--;
+ 3d2:	91 e0       	ldi	r25, 0x01	; 1
+ 3d4:	49 1a       	sub	r4, r25
+ 3d6:	51 08       	sbc	r5, r1
+ 3d8:	61 08       	sbc	r6, r1
+ 3da:	71 08       	sbc	r7, r1
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:524
+        start += 1000;
+ 3dc:	a8 e1       	ldi	r26, 0x18	; 24
+ 3de:	ea 1a       	sub	r14, r26
+ 3e0:	ac ef       	ldi	r26, 0xFC	; 252
+ 3e2:	fa 0a       	sbc	r15, r26
+ 3e4:	e9 cf       	rjmp	.-46     	; 0x3b8 <__stack+0x159>
+loop():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:90
+}
+
+void loop() {
+  wdt_reset();
+  float t = readTemp();
+  float err = t - T_TARGET;
+ 3e6:	20 e0       	ldi	r18, 0x00	; 0
+ 3e8:	30 e0       	ldi	r19, 0x00	; 0
+ 3ea:	4c e5       	ldi	r20, 0x5C	; 92
+ 3ec:	52 e4       	ldi	r21, 0x42	; 66
+ 3ee:	c7 01       	movw	r24, r14
+ 3f0:	b6 01       	movw	r22, r12
+ 3f2:	73 d0       	rcall	.+230    	; 0x4da <__subsf3>
+ 3f4:	6b 01       	movw	r12, r22
+ 3f6:	7c 01       	movw	r14, r24
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:97
+
+  if (t > T_PANIC) {
+    duty = PWM_TOP;
+    integral = maxI;
+  } else {
+    integral += err;                        // loop period is 1 s, so this is degC*s
+ 3f8:	20 91 64 00 	lds	r18, 0x0064	; 0x800064 <__data_end>
+ 3fc:	30 91 65 00 	lds	r19, 0x0065	; 0x800065 <__data_end+0x1>
+ 400:	40 91 66 00 	lds	r20, 0x0066	; 0x800066 <__data_end+0x2>
+ 404:	50 91 67 00 	lds	r21, 0x0067	; 0x800067 <__data_end+0x3>
+ 408:	69 d0       	rcall	.+210    	; 0x4dc <__addsf3>
+ 40a:	2b 01       	movw	r4, r22
+ 40c:	3c 01       	movw	r6, r24
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:98
+    if (integral > maxI) integral = maxI;   // anti-windup
+ 40e:	20 e0       	ldi	r18, 0x00	; 0
+ 410:	30 e8       	ldi	r19, 0x80	; 128
+ 412:	42 ea       	ldi	r20, 0xA2	; 162
+ 414:	54 e4       	ldi	r21, 0x44	; 68
+ 416:	10 d2       	rcall	.+1056   	; 0x838 <__gesf2>
+ 418:	18 16       	cp	r1, r24
+ 41a:	0c f4       	brge	.+2      	; 0x41e <__LOCK_REGION_LENGTH__+0x1e>
+ 41c:	47 c0       	rjmp	.+142    	; 0x4ac <__LOCK_REGION_LENGTH__+0xac>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:97
+
+  if (t > T_PANIC) {
+    duty = PWM_TOP;
+    integral = maxI;
+  } else {
+    integral += err;                        // loop period is 1 s, so this is degC*s
+ 41e:	40 92 64 00 	sts	0x0064, r4	; 0x800064 <__data_end>
+ 422:	50 92 65 00 	sts	0x0065, r5	; 0x800065 <__data_end+0x1>
+ 426:	60 92 66 00 	sts	0x0066, r6	; 0x800066 <__data_end+0x2>
+ 42a:	70 92 67 00 	sts	0x0067, r7	; 0x800067 <__data_end+0x3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:99
+    if (integral > maxI) integral = maxI;   // anti-windup
+    if (integral < 0)    integral = 0;
+ 42e:	20 e0       	ldi	r18, 0x00	; 0
+ 430:	30 e0       	ldi	r19, 0x00	; 0
+ 432:	a9 01       	movw	r20, r18
+ 434:	60 91 64 00 	lds	r22, 0x0064	; 0x800064 <__data_end>
+ 438:	70 91 65 00 	lds	r23, 0x0065	; 0x800065 <__data_end+0x1>
+ 43c:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <__data_end+0x2>
+ 440:	90 91 67 00 	lds	r25, 0x0067	; 0x800067 <__data_end+0x3>
+ 444:	af d0       	rcall	.+350    	; 0x5a4 <__cmpsf2>
+ 446:	87 ff       	sbrs	r24, 7
+ 448:	08 c0       	rjmp	.+16     	; 0x45a <__LOCK_REGION_LENGTH__+0x5a>
+ 44a:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <__data_end>
+ 44e:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <__data_end+0x1>
+ 452:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <__data_end+0x2>
+ 456:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <__data_end+0x3>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:100
+    duty = DUTY_MIN + KP * err + KI * integral;
+ 45a:	2d ec       	ldi	r18, 0xCD	; 205
+ 45c:	3c ec       	ldi	r19, 0xCC	; 204
+ 45e:	4c e4       	ldi	r20, 0x4C	; 76
+ 460:	5d e3       	ldi	r21, 0x3D	; 61
+ 462:	60 91 64 00 	lds	r22, 0x0064	; 0x800064 <__data_end>
+ 466:	70 91 65 00 	lds	r23, 0x0065	; 0x800065 <__data_end+0x1>
+ 46a:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <__data_end+0x2>
+ 46e:	90 91 67 00 	lds	r25, 0x0067	; 0x800067 <__data_end+0x3>
+ 472:	2b d2       	rcall	.+1110   	; 0x8ca <__mulsf3>
+ 474:	2b 01       	movw	r4, r22
+ 476:	3c 01       	movw	r6, r24
+ 478:	20 e0       	ldi	r18, 0x00	; 0
+ 47a:	30 e0       	ldi	r19, 0x00	; 0
+ 47c:	40 e4       	ldi	r20, 0x40	; 64
+ 47e:	50 e4       	ldi	r21, 0x40	; 64
+ 480:	c7 01       	movw	r24, r14
+ 482:	b6 01       	movw	r22, r12
+ 484:	22 d2       	rcall	.+1092   	; 0x8ca <__mulsf3>
+ 486:	20 e0       	ldi	r18, 0x00	; 0
+ 488:	30 e0       	ldi	r19, 0x00	; 0
+ 48a:	40 e8       	ldi	r20, 0x80	; 128
+ 48c:	51 e4       	ldi	r21, 0x41	; 65
+ 48e:	26 d0       	rcall	.+76     	; 0x4dc <__addsf3>
+ 490:	9b 01       	movw	r18, r22
+ 492:	ac 01       	movw	r20, r24
+ 494:	c3 01       	movw	r24, r6
+ 496:	b2 01       	movw	r22, r4
+ 498:	21 d0       	rcall	.+66     	; 0x4dc <__addsf3>
+ 49a:	60 93 60 00 	sts	0x0060, r22	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 49e:	70 93 61 00 	sts	0x0061, r23	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 4a2:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 4a6:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 4aa:	36 cf       	rjmp	.-404    	; 0x318 <__stack+0xb9>
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:98
+  if (t > T_PANIC) {
+    duty = PWM_TOP;
+    integral = maxI;
+  } else {
+    integral += err;                        // loop period is 1 s, so this is degC*s
+    if (integral > maxI) integral = maxI;   // anti-windup
+ 4ac:	80 92 64 00 	sts	0x0064, r8	; 0x800064 <__data_end>
+ 4b0:	90 92 65 00 	sts	0x0065, r9	; 0x800065 <__data_end+0x1>
+ 4b4:	a0 92 66 00 	sts	0x0066, r10	; 0x800066 <__data_end+0x2>
+ 4b8:	b0 92 67 00 	sts	0x0067, r11	; 0x800067 <__data_end+0x3>
+ 4bc:	b8 cf       	rjmp	.-144    	; 0x42e <__LOCK_REGION_LENGTH__+0x2e>
+setFan():
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:62
+    // Full speed: detach the compare output and hold PB1 low so Q1 stays off.
+    // Avoids relying on OCR1A = 0 edge behaviour.
+    TCCR1 &= ~(_BV(COM1A1) | _BV(COM1A0));
+    digitalWrite(FAN_PIN, LOW);
+  } else {
+    OCR1A = PWM_TOP - counts;
+ 4be:	8c 2f       	mov	r24, r28
+ 4c0:	86 1b       	sub	r24, r22
+ 4c2:	8e bd       	out	0x2e, r24	; 46
+/home/xtal/src/neoden/psu_controller/firmware/psu_controller/psu_controller.ino:63
+    TCCR1 |= _BV(COM1A1);
+ 4c4:	80 b7       	in	r24, 0x30	; 48
+ 4c6:	80 62       	ori	r24, 0x20	; 32
+ 4c8:	80 bf       	out	0x30, r24	; 48
+ 4ca:	6e cf       	rjmp	.-292    	; 0x3a8 <__stack+0x149>
+delay():
+/home/xtal/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:520
+  void delay(unsigned long ms)
+  {
+    #if (F_CPU>=1000000L)
+    uint16_t start = (uint16_t)micros();
+
+    while (ms > 0) {
+ 4cc:	41 14       	cp	r4, r1
+ 4ce:	51 04       	cpc	r5, r1
+ 4d0:	61 04       	cpc	r6, r1
+ 4d2:	71 04       	cpc	r7, r1
+ 4d4:	09 f0       	breq	.+2      	; 0x4d8 <__LOCK_REGION_LENGTH__+0xd8>
+ 4d6:	70 cf       	rjmp	.-288    	; 0x3b8 <__stack+0x159>
+ 4d8:	9d ce       	rjmp	.-710    	; 0x214 <main+0x5a>
+
+000004da <__subsf3>:
+__subsf3():
+ 4da:	50 58       	subi	r21, 0x80	; 128
+
+000004dc <__addsf3>:
+ 4dc:	bb 27       	eor	r27, r27
+ 4de:	aa 27       	eor	r26, r26
+ 4e0:	0e d0       	rcall	.+28     	; 0x4fe <__addsf3x>
+ 4e2:	70 c1       	rjmp	.+736    	; 0x7c4 <__fp_round>
+__addsf3():
+ 4e4:	61 d1       	rcall	.+706    	; 0x7a8 <__fp_pscA>
+ 4e6:	30 f0       	brcs	.+12     	; 0x4f4 <__addsf3+0x18>
+ 4e8:	66 d1       	rcall	.+716    	; 0x7b6 <__fp_pscB>
+ 4ea:	20 f0       	brcs	.+8      	; 0x4f4 <__addsf3+0x18>
+ 4ec:	31 f4       	brne	.+12     	; 0x4fa <__addsf3+0x1e>
+ 4ee:	9f 3f       	cpi	r25, 0xFF	; 255
+ 4f0:	11 f4       	brne	.+4      	; 0x4f6 <__addsf3+0x1a>
+ 4f2:	1e f4       	brtc	.+6      	; 0x4fa <__addsf3+0x1e>
+ 4f4:	56 c1       	rjmp	.+684    	; 0x7a2 <__fp_nan>
+ 4f6:	0e f4       	brtc	.+2      	; 0x4fa <__addsf3+0x1e>
+ 4f8:	e0 95       	com	r30
+ 4fa:	e7 fb       	bst	r30, 7
+ 4fc:	4c c1       	rjmp	.+664    	; 0x796 <__fp_inf>
+
+000004fe <__addsf3x>:
+__addsf3x():
+ 4fe:	e9 2f       	mov	r30, r25
+ 500:	72 d1       	rcall	.+740    	; 0x7e6 <__fp_split3>
+ 502:	80 f3       	brcs	.-32     	; 0x4e4 <__addsf3+0x8>
+ 504:	ba 17       	cp	r27, r26
+ 506:	62 07       	cpc	r22, r18
+ 508:	73 07       	cpc	r23, r19
+ 50a:	84 07       	cpc	r24, r20
+ 50c:	95 07       	cpc	r25, r21
+ 50e:	18 f0       	brcs	.+6      	; 0x516 <__addsf3x+0x18>
+ 510:	71 f4       	brne	.+28     	; 0x52e <__addsf3x+0x30>
+ 512:	9e f5       	brtc	.+102    	; 0x57a <__addsf3x+0x7c>
+ 514:	8a c1       	rjmp	.+788    	; 0x82a <__fp_zero>
+ 516:	0e f4       	brtc	.+2      	; 0x51a <__addsf3x+0x1c>
+ 518:	e0 95       	com	r30
+ 51a:	0b 2e       	mov	r0, r27
+ 51c:	ba 2f       	mov	r27, r26
+ 51e:	a0 2d       	mov	r26, r0
+ 520:	0b 01       	movw	r0, r22
+ 522:	b9 01       	movw	r22, r18
+ 524:	90 01       	movw	r18, r0
+ 526:	0c 01       	movw	r0, r24
+ 528:	ca 01       	movw	r24, r20
+ 52a:	a0 01       	movw	r20, r0
+ 52c:	11 24       	eor	r1, r1
+ 52e:	ff 27       	eor	r31, r31
+ 530:	59 1b       	sub	r21, r25
+ 532:	99 f0       	breq	.+38     	; 0x55a <__addsf3x+0x5c>
+ 534:	59 3f       	cpi	r21, 0xF9	; 249
+ 536:	50 f4       	brcc	.+20     	; 0x54c <__addsf3x+0x4e>
+ 538:	50 3e       	cpi	r21, 0xE0	; 224
+ 53a:	68 f1       	brcs	.+90     	; 0x596 <__addsf3x+0x98>
+ 53c:	1a 16       	cp	r1, r26
+ 53e:	f0 40       	sbci	r31, 0x00	; 0
+ 540:	a2 2f       	mov	r26, r18
+ 542:	23 2f       	mov	r18, r19
+ 544:	34 2f       	mov	r19, r20
+ 546:	44 27       	eor	r20, r20
+ 548:	58 5f       	subi	r21, 0xF8	; 248
+ 54a:	f3 cf       	rjmp	.-26     	; 0x532 <__addsf3x+0x34>
+ 54c:	46 95       	lsr	r20
+ 54e:	37 95       	ror	r19
+ 550:	27 95       	ror	r18
+ 552:	a7 95       	ror	r26
+ 554:	f0 40       	sbci	r31, 0x00	; 0
+ 556:	53 95       	inc	r21
+ 558:	c9 f7       	brne	.-14     	; 0x54c <__addsf3x+0x4e>
+ 55a:	7e f4       	brtc	.+30     	; 0x57a <__addsf3x+0x7c>
+ 55c:	1f 16       	cp	r1, r31
+ 55e:	ba 0b       	sbc	r27, r26
+ 560:	62 0b       	sbc	r22, r18
+ 562:	73 0b       	sbc	r23, r19
+ 564:	84 0b       	sbc	r24, r20
+ 566:	ba f0       	brmi	.+46     	; 0x596 <__addsf3x+0x98>
+ 568:	91 50       	subi	r25, 0x01	; 1
+ 56a:	a1 f0       	breq	.+40     	; 0x594 <__addsf3x+0x96>
+ 56c:	ff 0f       	add	r31, r31
+ 56e:	bb 1f       	adc	r27, r27
+ 570:	66 1f       	adc	r22, r22
+ 572:	77 1f       	adc	r23, r23
+ 574:	88 1f       	adc	r24, r24
+ 576:	c2 f7       	brpl	.-16     	; 0x568 <__addsf3x+0x6a>
+ 578:	0e c0       	rjmp	.+28     	; 0x596 <__addsf3x+0x98>
+ 57a:	ba 0f       	add	r27, r26
+ 57c:	62 1f       	adc	r22, r18
+ 57e:	73 1f       	adc	r23, r19
+ 580:	84 1f       	adc	r24, r20
+ 582:	48 f4       	brcc	.+18     	; 0x596 <__addsf3x+0x98>
+ 584:	87 95       	ror	r24
+ 586:	77 95       	ror	r23
+ 588:	67 95       	ror	r22
+ 58a:	b7 95       	ror	r27
+ 58c:	f7 95       	ror	r31
+ 58e:	9e 3f       	cpi	r25, 0xFE	; 254
+ 590:	08 f0       	brcs	.+2      	; 0x594 <__addsf3x+0x96>
+ 592:	b3 cf       	rjmp	.-154    	; 0x4fa <__addsf3+0x1e>
+ 594:	93 95       	inc	r25
+ 596:	88 0f       	add	r24, r24
+ 598:	08 f0       	brcs	.+2      	; 0x59c <__addsf3x+0x9e>
+ 59a:	99 27       	eor	r25, r25
+ 59c:	ee 0f       	add	r30, r30
+ 59e:	97 95       	ror	r25
+ 5a0:	87 95       	ror	r24
+ 5a2:	08 95       	ret
+
+000005a4 <__cmpsf2>:
+ 5a4:	d4 d0       	rcall	.+424    	; 0x74e <__fp_cmp>
+ 5a6:	08 f4       	brcc	.+2      	; 0x5aa <__cmpsf2+0x6>
+ 5a8:	81 e0       	ldi	r24, 0x01	; 1
+ 5aa:	08 95       	ret
+
+000005ac <__divsf3>:
+ 5ac:	0c d0       	rcall	.+24     	; 0x5c6 <__divsf3x>
+ 5ae:	0a c1       	rjmp	.+532    	; 0x7c4 <__fp_round>
+ 5b0:	02 d1       	rcall	.+516    	; 0x7b6 <__fp_pscB>
+ 5b2:	40 f0       	brcs	.+16     	; 0x5c4 <__divsf3+0x18>
+ 5b4:	f9 d0       	rcall	.+498    	; 0x7a8 <__fp_pscA>
+ 5b6:	30 f0       	brcs	.+12     	; 0x5c4 <__divsf3+0x18>
+ 5b8:	21 f4       	brne	.+8      	; 0x5c2 <__divsf3+0x16>
+ 5ba:	5f 3f       	cpi	r21, 0xFF	; 255
+ 5bc:	19 f0       	breq	.+6      	; 0x5c4 <__divsf3+0x18>
+__divsf3():
+ 5be:	eb c0       	rjmp	.+470    	; 0x796 <__fp_inf>
+ 5c0:	51 11       	cpse	r21, r1
+ 5c2:	34 c1       	rjmp	.+616    	; 0x82c <__fp_szero>
+ 5c4:	ee c0       	rjmp	.+476    	; 0x7a2 <__fp_nan>
+
+000005c6 <__divsf3x>:
+__divsf3x():
+ 5c6:	0f d1       	rcall	.+542    	; 0x7e6 <__fp_split3>
+ 5c8:	98 f3       	brcs	.-26     	; 0x5b0 <__divsf3+0x4>
+
+000005ca <__divsf3_pse>:
+ 5ca:	99 23       	and	r25, r25
+ 5cc:	c9 f3       	breq	.-14     	; 0x5c0 <__divsf3+0x14>
+ 5ce:	55 23       	and	r21, r21
+ 5d0:	b1 f3       	breq	.-20     	; 0x5be <__divsf3+0x12>
+ 5d2:	95 1b       	sub	r25, r21
+ 5d4:	55 0b       	sbc	r21, r21
+ 5d6:	bb 27       	eor	r27, r27
+ 5d8:	aa 27       	eor	r26, r26
+ 5da:	62 17       	cp	r22, r18
+ 5dc:	73 07       	cpc	r23, r19
+ 5de:	84 07       	cpc	r24, r20
+ 5e0:	38 f0       	brcs	.+14     	; 0x5f0 <__divsf3_pse+0x26>
+ 5e2:	9f 5f       	subi	r25, 0xFF	; 255
+ 5e4:	5f 4f       	sbci	r21, 0xFF	; 255
+ 5e6:	22 0f       	add	r18, r18
+ 5e8:	33 1f       	adc	r19, r19
+ 5ea:	44 1f       	adc	r20, r20
+ 5ec:	aa 1f       	adc	r26, r26
+ 5ee:	a9 f3       	breq	.-22     	; 0x5da <__divsf3_pse+0x10>
+ 5f0:	33 d0       	rcall	.+102    	; 0x658 <__divsf3_pse+0x8e>
+ 5f2:	0e 2e       	mov	r0, r30
+ 5f4:	3a f0       	brmi	.+14     	; 0x604 <__divsf3_pse+0x3a>
+ 5f6:	e0 e8       	ldi	r30, 0x80	; 128
+ 5f8:	30 d0       	rcall	.+96     	; 0x65a <__divsf3_pse+0x90>
+ 5fa:	91 50       	subi	r25, 0x01	; 1
+ 5fc:	50 40       	sbci	r21, 0x00	; 0
+ 5fe:	e6 95       	lsr	r30
+ 600:	00 1c       	adc	r0, r0
+ 602:	ca f7       	brpl	.-14     	; 0x5f6 <__divsf3_pse+0x2c>
+ 604:	29 d0       	rcall	.+82     	; 0x658 <__divsf3_pse+0x8e>
+ 606:	fe 2f       	mov	r31, r30
+ 608:	27 d0       	rcall	.+78     	; 0x658 <__divsf3_pse+0x8e>
+ 60a:	66 0f       	add	r22, r22
+ 60c:	77 1f       	adc	r23, r23
+ 60e:	88 1f       	adc	r24, r24
+ 610:	bb 1f       	adc	r27, r27
+ 612:	26 17       	cp	r18, r22
+ 614:	37 07       	cpc	r19, r23
+ 616:	48 07       	cpc	r20, r24
+ 618:	ab 07       	cpc	r26, r27
+ 61a:	b0 e8       	ldi	r27, 0x80	; 128
+ 61c:	09 f0       	breq	.+2      	; 0x620 <__divsf3_pse+0x56>
+ 61e:	bb 0b       	sbc	r27, r27
+ 620:	80 2d       	mov	r24, r0
+ 622:	bf 01       	movw	r22, r30
+ 624:	ff 27       	eor	r31, r31
+ 626:	93 58       	subi	r25, 0x83	; 131
+ 628:	5f 4f       	sbci	r21, 0xFF	; 255
+ 62a:	2a f0       	brmi	.+10     	; 0x636 <__divsf3_pse+0x6c>
+ 62c:	9e 3f       	cpi	r25, 0xFE	; 254
+ 62e:	51 05       	cpc	r21, r1
+ 630:	68 f0       	brcs	.+26     	; 0x64c <__divsf3_pse+0x82>
+ 632:	b1 c0       	rjmp	.+354    	; 0x796 <__fp_inf>
+ 634:	fb c0       	rjmp	.+502    	; 0x82c <__fp_szero>
+ 636:	5f 3f       	cpi	r21, 0xFF	; 255
+ 638:	ec f3       	brlt	.-6      	; 0x634 <__divsf3_pse+0x6a>
+ 63a:	98 3e       	cpi	r25, 0xE8	; 232
+ 63c:	dc f3       	brlt	.-10     	; 0x634 <__divsf3_pse+0x6a>
+ 63e:	86 95       	lsr	r24
+ 640:	77 95       	ror	r23
+ 642:	67 95       	ror	r22
+ 644:	b7 95       	ror	r27
+ 646:	f7 95       	ror	r31
+ 648:	9f 5f       	subi	r25, 0xFF	; 255
+ 64a:	c9 f7       	brne	.-14     	; 0x63e <__divsf3_pse+0x74>
+ 64c:	88 0f       	add	r24, r24
+ 64e:	91 1d       	adc	r25, r1
+ 650:	96 95       	lsr	r25
+ 652:	87 95       	ror	r24
+ 654:	97 f9       	bld	r25, 7
+ 656:	08 95       	ret
+ 658:	e1 e0       	ldi	r30, 0x01	; 1
+ 65a:	66 0f       	add	r22, r22
+ 65c:	77 1f       	adc	r23, r23
+ 65e:	88 1f       	adc	r24, r24
+ 660:	bb 1f       	adc	r27, r27
+ 662:	62 17       	cp	r22, r18
+ 664:	73 07       	cpc	r23, r19
+ 666:	84 07       	cpc	r24, r20
+ 668:	ba 07       	cpc	r27, r26
+ 66a:	20 f0       	brcs	.+8      	; 0x674 <__divsf3_pse+0xaa>
+ 66c:	62 1b       	sub	r22, r18
+ 66e:	73 0b       	sbc	r23, r19
+ 670:	84 0b       	sbc	r24, r20
+ 672:	ba 0b       	sbc	r27, r26
+ 674:	ee 1f       	adc	r30, r30
+ 676:	88 f7       	brcc	.-30     	; 0x65a <__divsf3_pse+0x90>
+ 678:	e0 95       	com	r30
+ 67a:	08 95       	ret
+
+0000067c <__fixunssfsi>:
+ 67c:	bc d0       	rcall	.+376    	; 0x7f6 <__fp_splitA>
+ 67e:	88 f0       	brcs	.+34     	; 0x6a2 <__fixunssfsi+0x26>
+ 680:	9f 57       	subi	r25, 0x7F	; 127
+ 682:	90 f0       	brcs	.+36     	; 0x6a8 <__fixunssfsi+0x2c>
+ 684:	b9 2f       	mov	r27, r25
+ 686:	99 27       	eor	r25, r25
+ 688:	b7 51       	subi	r27, 0x17	; 23
+ 68a:	a0 f0       	brcs	.+40     	; 0x6b4 <__fixunssfsi+0x38>
+ 68c:	d1 f0       	breq	.+52     	; 0x6c2 <__fixunssfsi+0x46>
+ 68e:	66 0f       	add	r22, r22
+ 690:	77 1f       	adc	r23, r23
+__fixunssfsi():
+ 692:	88 1f       	adc	r24, r24
+ 694:	99 1f       	adc	r25, r25
+ 696:	1a f0       	brmi	.+6      	; 0x69e <__fixunssfsi+0x22>
+ 698:	ba 95       	dec	r27
+ 69a:	c9 f7       	brne	.-14     	; 0x68e <__fixunssfsi+0x12>
+ 69c:	12 c0       	rjmp	.+36     	; 0x6c2 <__fixunssfsi+0x46>
+ 69e:	b1 30       	cpi	r27, 0x01	; 1
+ 6a0:	81 f0       	breq	.+32     	; 0x6c2 <__fixunssfsi+0x46>
+ 6a2:	c3 d0       	rcall	.+390    	; 0x82a <__fp_zero>
+ 6a4:	b1 e0       	ldi	r27, 0x01	; 1
+ 6a6:	08 95       	ret
+ 6a8:	c0 c0       	rjmp	.+384    	; 0x82a <__fp_zero>
+ 6aa:	67 2f       	mov	r22, r23
+ 6ac:	78 2f       	mov	r23, r24
+ 6ae:	88 27       	eor	r24, r24
+ 6b0:	b8 5f       	subi	r27, 0xF8	; 248
+ 6b2:	39 f0       	breq	.+14     	; 0x6c2 <__fixunssfsi+0x46>
+ 6b4:	b9 3f       	cpi	r27, 0xF9	; 249
+ 6b6:	cc f3       	brlt	.-14     	; 0x6aa <__fixunssfsi+0x2e>
+ 6b8:	86 95       	lsr	r24
+ 6ba:	77 95       	ror	r23
+ 6bc:	67 95       	ror	r22
+ 6be:	b3 95       	inc	r27
+ 6c0:	d9 f7       	brne	.-10     	; 0x6b8 <__fixunssfsi+0x3c>
+ 6c2:	3e f4       	brtc	.+14     	; 0x6d2 <__fixunssfsi+0x56>
+ 6c4:	90 95       	com	r25
+ 6c6:	80 95       	com	r24
+ 6c8:	70 95       	com	r23
+ 6ca:	61 95       	neg	r22
+ 6cc:	7f 4f       	sbci	r23, 0xFF	; 255
+ 6ce:	8f 4f       	sbci	r24, 0xFF	; 255
+ 6d0:	9f 4f       	sbci	r25, 0xFF	; 255
+ 6d2:	08 95       	ret
+
+000006d4 <__floatunsisf>:
+__floatunsisf():
+ 6d4:	e8 94       	clt
+ 6d6:	09 c0       	rjmp	.+18     	; 0x6ea <__floatsisf+0x12>
+
+000006d8 <__floatsisf>:
+ 6d8:	97 fb       	bst	r25, 7
+ 6da:	3e f4       	brtc	.+14     	; 0x6ea <__floatsisf+0x12>
+ 6dc:	90 95       	com	r25
+ 6de:	80 95       	com	r24
+ 6e0:	70 95       	com	r23
+ 6e2:	61 95       	neg	r22
+ 6e4:	7f 4f       	sbci	r23, 0xFF	; 255
+ 6e6:	8f 4f       	sbci	r24, 0xFF	; 255
+ 6e8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 6ea:	99 23       	and	r25, r25
+ 6ec:	a9 f0       	breq	.+42     	; 0x718 <__floatsisf+0x40>
+ 6ee:	f9 2f       	mov	r31, r25
+ 6f0:	96 e9       	ldi	r25, 0x96	; 150
+ 6f2:	bb 27       	eor	r27, r27
+ 6f4:	93 95       	inc	r25
+ 6f6:	f6 95       	lsr	r31
+ 6f8:	87 95       	ror	r24
+ 6fa:	77 95       	ror	r23
+ 6fc:	67 95       	ror	r22
+ 6fe:	b7 95       	ror	r27
+ 700:	f1 11       	cpse	r31, r1
+ 702:	f8 cf       	rjmp	.-16     	; 0x6f4 <__floatsisf+0x1c>
+ 704:	fa f4       	brpl	.+62     	; 0x744 <__floatsisf+0x6c>
+ 706:	bb 0f       	add	r27, r27
+ 708:	11 f4       	brne	.+4      	; 0x70e <__floatsisf+0x36>
+ 70a:	60 ff       	sbrs	r22, 0
+ 70c:	1b c0       	rjmp	.+54     	; 0x744 <__floatsisf+0x6c>
+ 70e:	6f 5f       	subi	r22, 0xFF	; 255
+ 710:	7f 4f       	sbci	r23, 0xFF	; 255
+ 712:	8f 4f       	sbci	r24, 0xFF	; 255
+ 714:	9f 4f       	sbci	r25, 0xFF	; 255
+ 716:	16 c0       	rjmp	.+44     	; 0x744 <__floatsisf+0x6c>
+ 718:	88 23       	and	r24, r24
+ 71a:	11 f0       	breq	.+4      	; 0x720 <__floatsisf+0x48>
+ 71c:	96 e9       	ldi	r25, 0x96	; 150
+ 71e:	11 c0       	rjmp	.+34     	; 0x742 <__floatsisf+0x6a>
+ 720:	77 23       	and	r23, r23
+ 722:	21 f0       	breq	.+8      	; 0x72c <__floatsisf+0x54>
+ 724:	9e e8       	ldi	r25, 0x8E	; 142
+ 726:	87 2f       	mov	r24, r23
+ 728:	76 2f       	mov	r23, r22
+ 72a:	05 c0       	rjmp	.+10     	; 0x736 <__floatsisf+0x5e>
+ 72c:	66 23       	and	r22, r22
+ 72e:	71 f0       	breq	.+28     	; 0x74c <__floatsisf+0x74>
+ 730:	96 e8       	ldi	r25, 0x86	; 134
+ 732:	86 2f       	mov	r24, r22
+ 734:	70 e0       	ldi	r23, 0x00	; 0
+ 736:	60 e0       	ldi	r22, 0x00	; 0
+ 738:	2a f0       	brmi	.+10     	; 0x744 <__floatsisf+0x6c>
+ 73a:	9a 95       	dec	r25
+ 73c:	66 0f       	add	r22, r22
+ 73e:	77 1f       	adc	r23, r23
+ 740:	88 1f       	adc	r24, r24
+ 742:	da f7       	brpl	.-10     	; 0x73a <__floatsisf+0x62>
+ 744:	88 0f       	add	r24, r24
+ 746:	96 95       	lsr	r25
+ 748:	87 95       	ror	r24
+ 74a:	97 f9       	bld	r25, 7
+ 74c:	08 95       	ret
+
+0000074e <__fp_cmp>:
+__fp_cmp():
+ 74e:	99 0f       	add	r25, r25
+ 750:	00 08       	sbc	r0, r0
+ 752:	55 0f       	add	r21, r21
+ 754:	aa 0b       	sbc	r26, r26
+ 756:	e0 e8       	ldi	r30, 0x80	; 128
+ 758:	fe ef       	ldi	r31, 0xFE	; 254
+ 75a:	16 16       	cp	r1, r22
+ 75c:	17 06       	cpc	r1, r23
+ 75e:	e8 07       	cpc	r30, r24
+ 760:	f9 07       	cpc	r31, r25
+ 762:	c0 f0       	brcs	.+48     	; 0x794 <__fp_cmp+0x46>
+ 764:	12 16       	cp	r1, r18
+ 766:	13 06       	cpc	r1, r19
+ 768:	e4 07       	cpc	r30, r20
+ 76a:	f5 07       	cpc	r31, r21
+ 76c:	98 f0       	brcs	.+38     	; 0x794 <__fp_cmp+0x46>
+ 76e:	62 1b       	sub	r22, r18
+ 770:	73 0b       	sbc	r23, r19
+ 772:	84 0b       	sbc	r24, r20
+ 774:	95 0b       	sbc	r25, r21
+ 776:	39 f4       	brne	.+14     	; 0x786 <__fp_cmp+0x38>
+ 778:	0a 26       	eor	r0, r26
+ 77a:	61 f0       	breq	.+24     	; 0x794 <__fp_cmp+0x46>
+ 77c:	23 2b       	or	r18, r19
+ 77e:	24 2b       	or	r18, r20
+ 780:	25 2b       	or	r18, r21
+ 782:	21 f4       	brne	.+8      	; 0x78c <__fp_cmp+0x3e>
+ 784:	08 95       	ret
+ 786:	0a 26       	eor	r0, r26
+ 788:	09 f4       	brne	.+2      	; 0x78c <__fp_cmp+0x3e>
+ 78a:	a1 40       	sbci	r26, 0x01	; 1
+ 78c:	a6 95       	lsr	r26
+ 78e:	8f ef       	ldi	r24, 0xFF	; 255
+ 790:	81 1d       	adc	r24, r1
+ 792:	81 1d       	adc	r24, r1
+ 794:	08 95       	ret
+
+00000796 <__fp_inf>:
+__fp_inf():
+ 796:	97 f9       	bld	r25, 7
+ 798:	9f 67       	ori	r25, 0x7F	; 127
+ 79a:	80 e8       	ldi	r24, 0x80	; 128
+ 79c:	70 e0       	ldi	r23, 0x00	; 0
+ 79e:	60 e0       	ldi	r22, 0x00	; 0
+ 7a0:	08 95       	ret
+
+000007a2 <__fp_nan>:
+__fp_nan():
+ 7a2:	9f ef       	ldi	r25, 0xFF	; 255
+ 7a4:	80 ec       	ldi	r24, 0xC0	; 192
+ 7a6:	08 95       	ret
+
+000007a8 <__fp_pscA>:
+__fp_pscA():
+ 7a8:	00 24       	eor	r0, r0
+ 7aa:	0a 94       	dec	r0
+ 7ac:	16 16       	cp	r1, r22
+ 7ae:	17 06       	cpc	r1, r23
+ 7b0:	18 06       	cpc	r1, r24
+ 7b2:	09 06       	cpc	r0, r25
+ 7b4:	08 95       	ret
+
+000007b6 <__fp_pscB>:
+__fp_pscB():
+ 7b6:	00 24       	eor	r0, r0
+ 7b8:	0a 94       	dec	r0
+ 7ba:	12 16       	cp	r1, r18
+ 7bc:	13 06       	cpc	r1, r19
+ 7be:	14 06       	cpc	r1, r20
+ 7c0:	05 06       	cpc	r0, r21
+ 7c2:	08 95       	ret
+
+000007c4 <__fp_round>:
+__fp_round():
+ 7c4:	09 2e       	mov	r0, r25
+ 7c6:	03 94       	inc	r0
+ 7c8:	00 0c       	add	r0, r0
+ 7ca:	11 f4       	brne	.+4      	; 0x7d0 <__fp_round+0xc>
+ 7cc:	88 23       	and	r24, r24
+ 7ce:	52 f0       	brmi	.+20     	; 0x7e4 <__fp_round+0x20>
+ 7d0:	bb 0f       	add	r27, r27
+ 7d2:	40 f4       	brcc	.+16     	; 0x7e4 <__fp_round+0x20>
+ 7d4:	bf 2b       	or	r27, r31
+ 7d6:	11 f4       	brne	.+4      	; 0x7dc <__fp_round+0x18>
+ 7d8:	60 ff       	sbrs	r22, 0
+ 7da:	04 c0       	rjmp	.+8      	; 0x7e4 <__fp_round+0x20>
+ 7dc:	6f 5f       	subi	r22, 0xFF	; 255
+ 7de:	7f 4f       	sbci	r23, 0xFF	; 255
+ 7e0:	8f 4f       	sbci	r24, 0xFF	; 255
+ 7e2:	9f 4f       	sbci	r25, 0xFF	; 255
+ 7e4:	08 95       	ret
+
+000007e6 <__fp_split3>:
+__fp_split3():
+ 7e6:	57 fd       	sbrc	r21, 7
+ 7e8:	90 58       	subi	r25, 0x80	; 128
+ 7ea:	44 0f       	add	r20, r20
+ 7ec:	55 1f       	adc	r21, r21
+ 7ee:	59 f0       	breq	.+22     	; 0x806 <__fp_splitA+0x10>
+ 7f0:	5f 3f       	cpi	r21, 0xFF	; 255
+ 7f2:	71 f0       	breq	.+28     	; 0x810 <__fp_splitA+0x1a>
+ 7f4:	47 95       	ror	r20
+
+000007f6 <__fp_splitA>:
+ 7f6:	88 0f       	add	r24, r24
+ 7f8:	97 fb       	bst	r25, 7
+ 7fa:	99 1f       	adc	r25, r25
+ 7fc:	61 f0       	breq	.+24     	; 0x816 <__fp_splitA+0x20>
+ 7fe:	9f 3f       	cpi	r25, 0xFF	; 255
+ 800:	79 f0       	breq	.+30     	; 0x820 <__fp_splitA+0x2a>
+ 802:	87 95       	ror	r24
+ 804:	08 95       	ret
+ 806:	12 16       	cp	r1, r18
+ 808:	13 06       	cpc	r1, r19
+ 80a:	14 06       	cpc	r1, r20
+ 80c:	55 1f       	adc	r21, r21
+ 80e:	f2 cf       	rjmp	.-28     	; 0x7f4 <__fp_split3+0xe>
+ 810:	46 95       	lsr	r20
+ 812:	f1 df       	rcall	.-30     	; 0x7f6 <__fp_splitA>
+ 814:	08 c0       	rjmp	.+16     	; 0x826 <__fp_splitA+0x30>
+ 816:	16 16       	cp	r1, r22
+ 818:	17 06       	cpc	r1, r23
+ 81a:	18 06       	cpc	r1, r24
+ 81c:	99 1f       	adc	r25, r25
+ 81e:	f1 cf       	rjmp	.-30     	; 0x802 <__fp_splitA+0xc>
+ 820:	86 95       	lsr	r24
+ 822:	71 05       	cpc	r23, r1
+ 824:	61 05       	cpc	r22, r1
+ 826:	08 94       	sec
+ 828:	08 95       	ret
+
+0000082a <__fp_zero>:
+__fp_zero():
+ 82a:	e8 94       	clt
+
+0000082c <__fp_szero>:
+ 82c:	bb 27       	eor	r27, r27
+ 82e:	66 27       	eor	r22, r22
+ 830:	77 27       	eor	r23, r23
+ 832:	cb 01       	movw	r24, r22
+ 834:	97 f9       	bld	r25, 7
+ 836:	08 95       	ret
+
+00000838 <__gesf2>:
+__gesf2():
+ 838:	8a df       	rcall	.-236    	; 0x74e <__fp_cmp>
+ 83a:	08 f4       	brcc	.+2      	; 0x83e <__gesf2+0x6>
+ 83c:	8f ef       	ldi	r24, 0xFF	; 255
+ 83e:	08 95       	ret
+ 840:	0e f0       	brts	.+2      	; 0x844 <__gesf2+0xc>
+ 842:	ae c0       	rjmp	.+348    	; 0x9a0 <__fp_mpack>
+ 844:	ae cf       	rjmp	.-164    	; 0x7a2 <__fp_nan>
+ 846:	68 94       	set
+ 848:	a6 cf       	rjmp	.-180    	; 0x796 <__fp_inf>
+
+0000084a <log>:
+log():
+ 84a:	d5 df       	rcall	.-86     	; 0x7f6 <__fp_splitA>
+ 84c:	c8 f3       	brcs	.-14     	; 0x840 <__gesf2+0x8>
+ 84e:	99 23       	and	r25, r25
+ 850:	d1 f3       	breq	.-12     	; 0x846 <__gesf2+0xe>
+ 852:	c6 f3       	brts	.-16     	; 0x844 <__gesf2+0xc>
+ 854:	df 93       	push	r29
+ 856:	cf 93       	push	r28
+ 858:	1f 93       	push	r17
+ 85a:	0f 93       	push	r16
+ 85c:	ff 92       	push	r15
+ 85e:	c9 2f       	mov	r28, r25
+ 860:	dd 27       	eor	r29, r29
+ 862:	88 23       	and	r24, r24
+ 864:	2a f0       	brmi	.+10     	; 0x870 <log+0x26>
+ 866:	21 97       	sbiw	r28, 0x01	; 1
+ 868:	66 0f       	add	r22, r22
+ 86a:	77 1f       	adc	r23, r23
+ 86c:	88 1f       	adc	r24, r24
+ 86e:	da f7       	brpl	.-10     	; 0x866 <log+0x1c>
+ 870:	20 e0       	ldi	r18, 0x00	; 0
+ 872:	30 e0       	ldi	r19, 0x00	; 0
+ 874:	40 e8       	ldi	r20, 0x80	; 128
+ 876:	5f eb       	ldi	r21, 0xBF	; 191
+ 878:	9f e3       	ldi	r25, 0x3F	; 63
+ 87a:	88 39       	cpi	r24, 0x98	; 152
+ 87c:	20 f0       	brcs	.+8      	; 0x886 <log+0x3c>
+ 87e:	80 3e       	cpi	r24, 0xE0	; 224
+ 880:	30 f0       	brcs	.+12     	; 0x88e <log+0x44>
+ 882:	21 96       	adiw	r28, 0x01	; 1
+ 884:	8f 77       	andi	r24, 0x7F	; 127
+ 886:	2a de       	rcall	.-940    	; 0x4dc <__addsf3>
+ 888:	ee e1       	ldi	r30, 0x1E	; 30
+ 88a:	f0 e0       	ldi	r31, 0x00	; 0
+ 88c:	03 c0       	rjmp	.+6      	; 0x894 <log+0x4a>
+ 88e:	26 de       	rcall	.-948    	; 0x4dc <__addsf3>
+ 890:	eb e4       	ldi	r30, 0x4B	; 75
+ 892:	f0 e0       	ldi	r31, 0x00	; 0
+ 894:	93 d0       	rcall	.+294    	; 0x9bc <__fp_powser>
+ 896:	8b 01       	movw	r16, r22
+ 898:	be 01       	movw	r22, r28
+ 89a:	ec 01       	movw	r28, r24
+ 89c:	fb 2e       	mov	r15, r27
+ 89e:	6f 57       	subi	r22, 0x7F	; 127
+ 8a0:	71 09       	sbc	r23, r1
+ 8a2:	75 95       	asr	r23
+ 8a4:	77 1f       	adc	r23, r23
+ 8a6:	88 0b       	sbc	r24, r24
+ 8a8:	99 0b       	sbc	r25, r25
+ 8aa:	16 df       	rcall	.-468    	; 0x6d8 <__floatsisf>
+ 8ac:	28 e1       	ldi	r18, 0x18	; 24
+ 8ae:	32 e7       	ldi	r19, 0x72	; 114
+ 8b0:	41 e3       	ldi	r20, 0x31	; 49
+ 8b2:	5f e3       	ldi	r21, 0x3F	; 63
+ 8b4:	15 d0       	rcall	.+42     	; 0x8e0 <__mulsf3x>
+ 8b6:	af 2d       	mov	r26, r15
+ 8b8:	98 01       	movw	r18, r16
+ 8ba:	ae 01       	movw	r20, r28
+ 8bc:	ff 90       	pop	r15
+ 8be:	0f 91       	pop	r16
+ 8c0:	1f 91       	pop	r17
+ 8c2:	cf 91       	pop	r28
+ 8c4:	df 91       	pop	r29
+ 8c6:	1b de       	rcall	.-970    	; 0x4fe <__addsf3x>
+ 8c8:	7d cf       	rjmp	.-262    	; 0x7c4 <__fp_round>
+
+000008ca <__mulsf3>:
+ 8ca:	0a d0       	rcall	.+20     	; 0x8e0 <__mulsf3x>
+ 8cc:	7b cf       	rjmp	.-266    	; 0x7c4 <__fp_round>
+ 8ce:	6c df       	rcall	.-296    	; 0x7a8 <__fp_pscA>
+ 8d0:	28 f0       	brcs	.+10     	; 0x8dc <__mulsf3+0x12>
+ 8d2:	71 df       	rcall	.-286    	; 0x7b6 <__fp_pscB>
+__mulsf3():
+ 8d4:	18 f0       	brcs	.+6      	; 0x8dc <__mulsf3+0x12>
+ 8d6:	95 23       	and	r25, r21
+ 8d8:	09 f0       	breq	.+2      	; 0x8dc <__mulsf3+0x12>
+ 8da:	5d cf       	rjmp	.-326    	; 0x796 <__fp_inf>
+ 8dc:	62 cf       	rjmp	.-316    	; 0x7a2 <__fp_nan>
+ 8de:	a6 cf       	rjmp	.-180    	; 0x82c <__fp_szero>
+
+000008e0 <__mulsf3x>:
+__mulsf3x():
+ 8e0:	82 df       	rcall	.-252    	; 0x7e6 <__fp_split3>
+ 8e2:	a8 f3       	brcs	.-22     	; 0x8ce <__mulsf3+0x4>
+
+000008e4 <__mulsf3_pse>:
+ 8e4:	99 23       	and	r25, r25
+ 8e6:	d9 f3       	breq	.-10     	; 0x8de <__mulsf3+0x14>
+ 8e8:	55 23       	and	r21, r21
+ 8ea:	c9 f3       	breq	.-14     	; 0x8de <__mulsf3+0x14>
+ 8ec:	95 0f       	add	r25, r21
+ 8ee:	50 e0       	ldi	r21, 0x00	; 0
+ 8f0:	55 1f       	adc	r21, r21
+ 8f2:	aa 27       	eor	r26, r26
+ 8f4:	ee 27       	eor	r30, r30
+ 8f6:	ff 27       	eor	r31, r31
+ 8f8:	bb 27       	eor	r27, r27
+ 8fa:	00 24       	eor	r0, r0
+ 8fc:	08 94       	sec
+ 8fe:	67 95       	ror	r22
+ 900:	20 f4       	brcc	.+8      	; 0x90a <__mulsf3_pse+0x26>
+ 902:	e2 0f       	add	r30, r18
+ 904:	f3 1f       	adc	r31, r19
+ 906:	b4 1f       	adc	r27, r20
+ 908:	0a 1e       	adc	r0, r26
+ 90a:	22 0f       	add	r18, r18
+ 90c:	33 1f       	adc	r19, r19
+ 90e:	44 1f       	adc	r20, r20
+ 910:	aa 1f       	adc	r26, r26
+ 912:	66 95       	lsr	r22
+ 914:	a9 f7       	brne	.-22     	; 0x900 <__mulsf3_pse+0x1c>
+ 916:	77 95       	ror	r23
+ 918:	30 f4       	brcc	.+12     	; 0x926 <__mulsf3_pse+0x42>
+ 91a:	f3 0f       	add	r31, r19
+ 91c:	b4 1f       	adc	r27, r20
+ 91e:	0a 1e       	adc	r0, r26
+ 920:	12 1e       	adc	r1, r18
+ 922:	08 f4       	brcc	.+2      	; 0x926 <__mulsf3_pse+0x42>
+ 924:	63 95       	inc	r22
+ 926:	33 0f       	add	r19, r19
+ 928:	44 1f       	adc	r20, r20
+ 92a:	aa 1f       	adc	r26, r26
+ 92c:	22 1f       	adc	r18, r18
+ 92e:	76 95       	lsr	r23
+ 930:	99 f7       	brne	.-26     	; 0x918 <__mulsf3_pse+0x34>
+ 932:	87 95       	ror	r24
+ 934:	20 f4       	brcc	.+8      	; 0x93e <__mulsf3_pse+0x5a>
+ 936:	b4 0f       	add	r27, r20
+ 938:	0a 1e       	adc	r0, r26
+ 93a:	12 1e       	adc	r1, r18
+ 93c:	63 1f       	adc	r22, r19
+ 93e:	44 0f       	add	r20, r20
+ 940:	aa 1f       	adc	r26, r26
+ 942:	22 1f       	adc	r18, r18
+ 944:	33 1f       	adc	r19, r19
+ 946:	86 95       	lsr	r24
+ 948:	a9 f7       	brne	.-22     	; 0x934 <__mulsf3_pse+0x50>
+ 94a:	86 2f       	mov	r24, r22
+ 94c:	71 2d       	mov	r23, r1
+ 94e:	60 2d       	mov	r22, r0
+ 950:	11 24       	eor	r1, r1
+ 952:	9f 57       	subi	r25, 0x7F	; 127
+ 954:	50 40       	sbci	r21, 0x00	; 0
+ 956:	8a f0       	brmi	.+34     	; 0x97a <__mulsf3_pse+0x96>
+ 958:	e1 f0       	breq	.+56     	; 0x992 <__mulsf3_pse+0xae>
+ 95a:	88 23       	and	r24, r24
+ 95c:	4a f0       	brmi	.+18     	; 0x970 <__mulsf3_pse+0x8c>
+ 95e:	ee 0f       	add	r30, r30
+ 960:	ff 1f       	adc	r31, r31
+ 962:	bb 1f       	adc	r27, r27
+ 964:	66 1f       	adc	r22, r22
+ 966:	77 1f       	adc	r23, r23
+ 968:	88 1f       	adc	r24, r24
+ 96a:	91 50       	subi	r25, 0x01	; 1
+ 96c:	50 40       	sbci	r21, 0x00	; 0
+ 96e:	a9 f7       	brne	.-22     	; 0x95a <__mulsf3_pse+0x76>
+ 970:	9e 3f       	cpi	r25, 0xFE	; 254
+ 972:	51 05       	cpc	r21, r1
+ 974:	70 f0       	brcs	.+28     	; 0x992 <__mulsf3_pse+0xae>
+ 976:	0f cf       	rjmp	.-482    	; 0x796 <__fp_inf>
+ 978:	59 cf       	rjmp	.-334    	; 0x82c <__fp_szero>
+ 97a:	5f 3f       	cpi	r21, 0xFF	; 255
+ 97c:	ec f3       	brlt	.-6      	; 0x978 <__mulsf3_pse+0x94>
+ 97e:	98 3e       	cpi	r25, 0xE8	; 232
+ 980:	dc f3       	brlt	.-10     	; 0x978 <__mulsf3_pse+0x94>
+ 982:	86 95       	lsr	r24
+ 984:	77 95       	ror	r23
+ 986:	67 95       	ror	r22
+ 988:	b7 95       	ror	r27
+ 98a:	f7 95       	ror	r31
+ 98c:	e7 95       	ror	r30
+ 98e:	9f 5f       	subi	r25, 0xFF	; 255
+ 990:	c1 f7       	brne	.-16     	; 0x982 <__mulsf3_pse+0x9e>
+ 992:	fe 2b       	or	r31, r30
+ 994:	88 0f       	add	r24, r24
+ 996:	91 1d       	adc	r25, r1
+ 998:	96 95       	lsr	r25
+ 99a:	87 95       	ror	r24
+ 99c:	97 f9       	bld	r25, 7
+ 99e:	08 95       	ret
+
+000009a0 <__fp_mpack>:
+ 9a0:	9f 3f       	cpi	r25, 0xFF	; 255
+ 9a2:	31 f0       	breq	.+12     	; 0x9b0 <__fp_mpack_finite+0xc>
+
+000009a4 <__fp_mpack_finite>:
+ 9a4:	91 50       	subi	r25, 0x01	; 1
+ 9a6:	20 f4       	brcc	.+8      	; 0x9b0 <__fp_mpack_finite+0xc>
+ 9a8:	87 95       	ror	r24
+ 9aa:	77 95       	ror	r23
+ 9ac:	67 95       	ror	r22
+ 9ae:	b7 95       	ror	r27
+ 9b0:	88 0f       	add	r24, r24
+__fp_mpack_finite():
+ 9b2:	91 1d       	adc	r25, r1
+ 9b4:	96 95       	lsr	r25
+ 9b6:	87 95       	ror	r24
+ 9b8:	97 f9       	bld	r25, 7
+ 9ba:	08 95       	ret
+
+000009bc <__fp_powser>:
+__fp_powser():
+ 9bc:	df 93       	push	r29
+ 9be:	cf 93       	push	r28
+ 9c0:	1f 93       	push	r17
+ 9c2:	0f 93       	push	r16
+ 9c4:	ff 92       	push	r15
+ 9c6:	ef 92       	push	r14
+ 9c8:	df 92       	push	r13
+ 9ca:	7b 01       	movw	r14, r22
+ 9cc:	8c 01       	movw	r16, r24
+ 9ce:	68 94       	set
+ 9d0:	05 c0       	rjmp	.+10     	; 0x9dc <__fp_powser+0x20>
+ 9d2:	da 2e       	mov	r13, r26
+ 9d4:	ef 01       	movw	r28, r30
+ 9d6:	84 df       	rcall	.-248    	; 0x8e0 <__mulsf3x>
+ 9d8:	fe 01       	movw	r30, r28
+ 9da:	e8 94       	clt
+ 9dc:	a5 91       	lpm	r26, Z+
+ 9de:	25 91       	lpm	r18, Z+
+ 9e0:	35 91       	lpm	r19, Z+
+ 9e2:	45 91       	lpm	r20, Z+
+ 9e4:	55 91       	lpm	r21, Z+
+ 9e6:	ae f3       	brts	.-22     	; 0x9d2 <__fp_powser+0x16>
+ 9e8:	ef 01       	movw	r28, r30
+ 9ea:	89 dd       	rcall	.-1262   	; 0x4fe <__addsf3x>
+ 9ec:	fe 01       	movw	r30, r28
+ 9ee:	97 01       	movw	r18, r14
+ 9f0:	a8 01       	movw	r20, r16
+ 9f2:	da 94       	dec	r13
+ 9f4:	79 f7       	brne	.-34     	; 0x9d4 <__fp_powser+0x18>
+ 9f6:	df 90       	pop	r13
+ 9f8:	ef 90       	pop	r14
+ 9fa:	ff 90       	pop	r15
+ 9fc:	0f 91       	pop	r16
+ 9fe:	1f 91       	pop	r17
+ a00:	cf 91       	pop	r28
+ a02:	df 91       	pop	r29
+ a04:	08 95       	ret
+
+00000a06 <_exit>:
+exit():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+ a06:	f8 94       	cli
+
+00000a08 <__stop_program>:
+__stop_program():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+ a08:	ff cf       	rjmp	.-2      	; 0xa08 <__stop_program>

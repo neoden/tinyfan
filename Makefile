@@ -6,7 +6,8 @@
 #   make pos        -> production/psu_controller-all-pos.csv (JLCPCB CPL header)
 #   make zip        -> build/psu_controller-gerbers.zip for upload to the fab
 #   make pdf        -> build/psu_controller-schematic.pdf
-#   make clean      -> remove build/
+#   make firmware   -> build the ATtiny85 firmware (see firmware/Makefile)
+#   make clean      -> remove build/ (hardware and firmware)
 
 PROJECT   := psu_controller
 SCH       := $(PROJECT).kicad_sch
@@ -23,7 +24,7 @@ LAYERS := F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge
 BOM_FIELDS := Reference,Value,Footprint,LCSC Part \#
 BOM_LABELS := Designator,Comment,Footprint,LCSC Part \#
 
-.PHONY: all check erc drc gerbers drill bom pos zip pdf clean
+.PHONY: all check erc drc gerbers drill bom pos zip pdf firmware clean
 
 all: check gerbers bom pos
 
@@ -74,5 +75,9 @@ zip: gerbers $(BUILD_DIR)
 pdf: $(BUILD_DIR)
 	$(KICAD_CLI) sch export pdf --output $(BUILD_DIR)/$(PROJECT)-schematic.pdf $(SCH)
 
+firmware:
+	$(MAKE) -C firmware
+
 clean:
 	rm -rf $(BUILD_DIR)
+	$(MAKE) -C firmware clean
